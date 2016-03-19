@@ -20,12 +20,12 @@ package com.google.gwt.maps.client;
  * #L%
  */
 
+import com.google.gwt.ajaxloader.client.AjaxLoader;
+import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-
-import com.google.gwt.ajaxloader.client.AjaxLoader;
-import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
 
 /**
  * Load Maps javascript v3 api
@@ -37,154 +37,17 @@ public class LoadApi {
   /**
    * Note: If you use 3, it will take the newest stable available. Don't want that. We didn't test with that yet!
    */
-  public final static String API_VERSION = "3.10";
+  public final static String API_VERSION = "3.22";
 
   /**
-   * Libraries not loaded by default <br>
-   * <br>
-   * See <a href= "https://developers.google.com/maps/documentation/javascript/basics.html#Libraries" >Libraries API
-   * Doc</a>
+   * private constructor
    */
-  public static enum LoadLibrary {
-
-    /**
-     * Allows your Maps API application to include context-sensitive text ads, allowing you to share in ad revenue for
-     * ads shown to your users. Consult the AdSense Library documentation for more information.
-     */
-    ADSENSE,
-
-    /**
-     * Provides a graphical interface for users to draw polygons, rectangles, polylines, circles, and markers on the
-     * map. Consult the Drawing Library documentation for more information.
-     */
-    DRAWING,
-
-    /**
-     * Geometry includes utility functions for calculating scalar geometric values (such as distance and area) on the
-     * the surface of the earth. Consult the Geometry Library documentation for more information.
-     */
-    GEOMETRY,
-
-    /**
-     * Panoramio contains functionality for adding Panoramio photo layers to your Maps API application. Consult the
-     * Panoramio Layers documentation for more information.
-     */
-    PANORAMIO,
-
-    /**
-     * Places enables your application to search for businesses, geographic locations, and points of interest near a
-     * given location, or as a user types. Consult the Places Library documentation for more information.
-     */
-    PLACES,
-
-    /**
-     * Weather contains functionality for adding meterological layers to your Maps API application. Consult the Weather
-     * Layers documentation for more information.
-     */
-    WEATHER,
-
-    /**
-     * Visualization contains functionality for adding advanced visualization layers to your Maps API application.
-     * Consult the Visualization documentation for more information.
-     */
-    VISUALIZATION;
-
-    public String value() {
-      return name().toLowerCase();
-    }
-
-    public static LoadLibrary fromValue(String value) {
-      return valueOf(value.toUpperCase());
-    }
-
-    @Override
-    public String toString() {
-      return name().toLowerCase();
-    }
-  }
-
-  /**
-   * @See <a href="https://developers.google.com/maps/documentation/javascript/basics#Localization">Localization docs</a>
-   * @See <a href="https://spreadsheets.google.com/pub?key=p9pdwsai2hDMsLkXsoM05KQ&gid=1">List of languages</a>
-   */
-  public static enum Language {
-
-    GERMAN("de"),
-    GREEK("el"),
-    ENGLISH("en"),
-    ENGLISH_AUSTRALIAN("en-AU"),
-    ENGLISH_GREAT_BRITAIN("en-GB"),
-    SPANISH("es"),
-    BASQUE("eu"),
-    FARSI("fa"),
-    FINNISH("fi"),
-    FILIPINO("fil"),
-    FRENCH("fr"),
-    GALICIAN("gl"),
-    GUJARATI("gu"),
-    HINDI("hi"),
-    CROATIAN("hr"),
-    HUNGARIAN("hu"),
-    INDONESIAN("id"),
-    ITALIAN("it"),
-    HEBREW("iw"),
-    JAPANESE("ja"),
-    KANNADA("kn"),
-    KOREAN("ko"),
-    LITHUANIAN("lt"),
-    LATVIAN("lv"),
-    MALAYALAM("ml"),
-    MARATHI("mr"),
-    DUTCH("nl"),
-    NORWEGIAN_NYNORSK("nn"),
-    NORWEGIAN("no"),
-    ORIYA("or"),
-    POLISH("pl"),
-    PORTUGUESE("pt"),
-    PORTUGUESE_BRAZIL("pt-BR"),
-    PORTUGUESE_PORTUGAL("pt-PT"),
-    ROMANSCH("rm"),
-    ROMANIAN("ro"),
-    RUSSIAN("ru"),
-    SLOVAK("sk"),
-    SLOVENIAN("sl"),
-    SERBIAN("sr"),
-    SWEDISH("sv"),
-    TAGALOG("tl"),
-    TAMIL("ta"),
-    TELUGU("te"),
-    THAI("th"),
-    TURKISH("tr"),
-    UKRAINIAN("uk"),
-    VIETNAMESE("vi"),
-    CHINESE_SIMPLIFIED("zh-CN"),
-    CHINESE_TRADITIONAL("zh-TW"),
-    DANISH("da");
-
-    private String value;
-
-    Language(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    public static Language fromValue(String value) {
-      return valueOf(value.toUpperCase());
-    }
-
-    @Override
-    public String toString() {
-      return name().toLowerCase() + "(" + value + ")";
-    }
-
+  private LoadApi() {
   }
 
   /**
    * Load Maps javascript v3 api with default libraries. these are not loaded {@link LoadLibrary}
-   * 
+   *
    * @param onLoad - callback on success
    * @param sensor - derive location [true|false]
    */
@@ -194,7 +57,7 @@ public class LoadApi {
 
   /**
    * loads maps api
-   * 
+   *
    * @param onLoad callback on success
    * @param loadLibraries load additional libraries like geometry
    * @param sensor derive location [true|false]
@@ -202,10 +65,10 @@ public class LoadApi {
   public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, boolean sensor) {
     load(onLoad, sensor, loadLibraries, null, null);
   }
-  
+
   /**
    * loads maps api
-   * 
+   *
    * @param onLoad callback on success
    * @param loadLibraries load additional libraries like geometry
    * @param sensor derive location [true|false]
@@ -215,9 +78,9 @@ public class LoadApi {
     load(onLoad, sensor, loadLibraries, language, null);
   }
 
-  /**
+    /**
    * loads maps api
-   * 
+     *
    * @param onLoad callback on success
    * @param loadLibraries load additional libraries like geometry
    * @param sensor derive location [true|false]
@@ -226,10 +89,10 @@ public class LoadApi {
     ArrayList<LoadLibrary> loadLibrariesList = new ArrayList<LoadLibrary>(Arrays.asList(loadLibraries));
     load(onLoad, sensor, loadLibrariesList, null, null);
   }
-  
+
   /**
    * loads maps api
-   * 
+   *
    * @param onLoad callback on success
    * @param loadLibraries load additional libraries like geometry
    * @param sensor derive location [true|false]
@@ -240,9 +103,9 @@ public class LoadApi {
     load(onLoad, sensor, loadLibrariesList, language, null);
   }
 
-  /**
+    /**
    * loads maps api
-   * 
+     *
    * @param onLoad callback on success
    * @param sensor derive location [true|false]
    * @param otherParams add additional params. like "key=YOUR_API_KEY"
@@ -253,7 +116,7 @@ public class LoadApi {
 
   /**
    * loads maps api
-   * 
+   *
    * @param onLoad callback on success
    * @param loadLibraries load additional libraries like geometry
    * @param sensor sensor derive location [true|false]
@@ -265,7 +128,7 @@ public class LoadApi {
 
   /**
    * loads maps api
-   * 
+   *
    * @param onLoad callback on success
    * @param loadLibraries load additional libraries like geometry
    * @param sensor sensor derive location [true|false]
@@ -299,7 +162,7 @@ public class LoadApi {
 
   /**
    * get the url libraries parameter
-   * 
+   *
    * @param loadLibraries
    */
   private static String getLibraries(ArrayList<LoadLibrary> loadLibraries) {
@@ -323,8 +186,145 @@ public class LoadApi {
   }
 
   /**
-   * private constructor
+   * Libraries not loaded by default <br>
+   * <br>
+   * See <a href= "https://developers.google.com/maps/documentation/javascript/basics.html#Libraries" >Libraries API
+   * Doc</a>
    */
-  private LoadApi() {
+  public static enum LoadLibrary {
+
+      /**
+       * Allows your Maps API application to include context-sensitive text ads, allowing you to share in ad revenue for
+       * ads shown to your users. Consult the AdSense Library documentation for more information.
+       */
+      ADSENSE,
+
+      /**
+       * Provides a graphical interface for users to draw polygons, rectangles, polylines, circles, and markers on the
+       * map. Consult the Drawing Library documentation for more information.
+       */
+      DRAWING,
+
+      /**
+       * Geometry includes utility functions for calculating scalar geometric values (such as distance and area) on the
+       * the surface of the earth. Consult the Geometry Library documentation for more information.
+       */
+      GEOMETRY,
+
+      /**
+       * Panoramio contains functionality for adding Panoramio photo layers to your Maps API application. Consult the
+       * Panoramio Layers documentation for more information.
+       */
+      PANORAMIO,
+
+      /**
+       * Places enables your application to search for businesses, geographic locations, and points of interest near a
+       * given location, or as a user types. Consult the Places Library documentation for more information.
+       */
+      PLACES,
+
+      /**
+       * Weather contains functionality for adding meterological layers to your Maps API application. Consult the Weather
+       * Layers documentation for more information.
+       */
+      WEATHER,
+
+      /**
+       * Visualization contains functionality for adding advanced visualization layers to your Maps API application.
+       * Consult the Visualization documentation for more information.
+       */
+      VISUALIZATION;
+
+      public static LoadLibrary fromValue(String value) {
+          return valueOf(value.toUpperCase());
+      }
+
+      public String value() {
+          return name().toLowerCase();
+      }
+
+      @Override
+      public String toString() {
+          return name().toLowerCase();
+      }
   }
+
+    /**
+     * @See <a href="https://developers.google.com/maps/documentation/javascript/basics#Localization">Localization docs</a>
+     * @See <a href="https://spreadsheets.google.com/pub?key=p9pdwsai2hDMsLkXsoM05KQ&gid=1">List of languages</a>
+     */
+    public static enum Language {
+
+        GERMAN("de"),
+        GREEK("el"),
+        ENGLISH("en"),
+        ENGLISH_AUSTRALIAN("en-AU"),
+        ENGLISH_GREAT_BRITAIN("en-GB"),
+        SPANISH("es"),
+        BASQUE("eu"),
+        FARSI("fa"),
+        FINNISH("fi"),
+        FILIPINO("fil"),
+        FRENCH("fr"),
+        GALICIAN("gl"),
+        GUJARATI("gu"),
+        HINDI("hi"),
+        CROATIAN("hr"),
+        HUNGARIAN("hu"),
+        INDONESIAN("id"),
+        ITALIAN("it"),
+        HEBREW("iw"),
+        JAPANESE("ja"),
+        KANNADA("kn"),
+        KOREAN("ko"),
+        LITHUANIAN("lt"),
+        LATVIAN("lv"),
+        MALAYALAM("ml"),
+        MARATHI("mr"),
+        DUTCH("nl"),
+        NORWEGIAN_NYNORSK("nn"),
+        NORWEGIAN("no"),
+        ORIYA("or"),
+        POLISH("pl"),
+        PORTUGUESE("pt"),
+        PORTUGUESE_BRAZIL("pt-BR"),
+        PORTUGUESE_PORTUGAL("pt-PT"),
+        ROMANSCH("rm"),
+        ROMANIAN("ro"),
+        RUSSIAN("ru"),
+        SLOVAK("sk"),
+        SLOVENIAN("sl"),
+        SERBIAN("sr"),
+        SWEDISH("sv"),
+        TAGALOG("tl"),
+        TAMIL("ta"),
+        TELUGU("te"),
+        THAI("th"),
+        TURKISH("tr"),
+        UKRAINIAN("uk"),
+        VIETNAMESE("vi"),
+        CHINESE_SIMPLIFIED("zh-CN"),
+        CHINESE_TRADITIONAL("zh-TW"),
+        DANISH("da");
+
+        private String value;
+
+        Language(String value) {
+            this.value = value;
+        }
+
+        public static Language fromValue(String value) {
+            return valueOf(value.toUpperCase());
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return name().toLowerCase() + "(" + value + ")";
+        }
+
+    }
 }
