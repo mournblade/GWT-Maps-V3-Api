@@ -27,33 +27,49 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public class PlaceDetailsRequest extends JavaScriptObject {
 
-  /**
-   * use newInstance();
-   */
-  protected PlaceDetailsRequest() {
-  }
+    /**
+     * use newInstance();
+     */
+    protected PlaceDetailsRequest() {
+    }
 
-  /**
-   * A Place details query to be sent to the PlacesService.
-   */
-  public static final PlaceDetailsRequest newInstance() {
-    return JavaScriptObject.createObject().cast();
-  }
+    /**
+     * A Place details query to be sent to the PlacesService.
+     */
+    public static final PlaceDetailsRequest newInstance() {
+        return JavaScriptObject.createObject().cast();
+    }
 
-  /**
-   * The reference of the Place for which details are being requested.
-   * 
-   * @param reference
-   */
-  public final native void setReference(String reference) /*-{
-    this.reference = reference;
-  }-*/;
+    /**
+     * The reference of the Place for which details are being requested.
+     *
+     * @param reference
+     */
+    public final native void setReference(String reference) /*-{
+        this.reference = reference;
+    }-*/;
 
-  /**
-   * The reference of the Place for which details are being requested.
-   */
-  public final native String getReference() /*-{
-    return this.reference;
-  }-*/;
+    /**
+     * The reference of the Place for which details are being requested.
+     */
+    public final native String getReference() /*-{
+        return this.reference;
+    }-*/;
+
+    /**
+     * The placeId of the Place for which details are being requested.
+     *
+     * @param placeId
+     */
+    public final native void setPlaceId(String placeId) /*-{
+        this.placeId = placeId;
+    }-*/;
+
+    /**
+     * The placeId of the Place for which details are being requested.
+     */
+    public final native String getPlaceId() /*-{
+        return this.placeId;
+    }-*/;
 
 }
