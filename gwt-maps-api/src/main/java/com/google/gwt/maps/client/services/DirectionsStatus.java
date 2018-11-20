@@ -67,7 +67,11 @@ public enum DirectionsStatus {
   /**
    * No route could be found between the origin and destination.
    */
-  ZERO_RESULTS;
+  ZERO_RESULTS,
+  /**
+   * No route could be found between the origin and destination.
+   */
+  MAX_ROUTE_LENGTH_EXCEEDED;
 
   public String value() {
     return name().toLowerCase();

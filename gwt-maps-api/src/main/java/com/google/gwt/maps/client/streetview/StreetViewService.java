@@ -104,16 +104,4 @@ public class StreetViewService extends JavaScriptObject {
         };
         this.getPanoramaByLocation(latlng, radius, callback);
     }-*/;
-
-    public final native void getPanorama(LatLng latlng,
-                                         StreetViewPreference preference, double radius,
-                                         StreetViewSource source, PanoramaByLocationHandler handler) /*-{
-        alert(latlng.lat);
-        alert(latlng.lng);
-        var callback = function (data, status) {
-            $entry(@com.google.gwt.maps.client.streetview.StreetViewService::getPanoramaByLocationImpl(Lcom/google/gwt/maps/client/streetview/StreetViewPanoramaData;Ljava/lang/String;Lcom/google/gwt/maps/client/streetview/PanoramaByLocationHandler;)(data, status, handler));
-        };
-        this.getPanorama(latlng, $wnd.google.maps.StreetViewPreference.BEST, radius, $wnd.google.maps.StreetViewSource.OUTDOOR, callback);
-    }-*/;
-
 }

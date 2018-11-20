@@ -37,7 +37,7 @@ public class LoadApi {
   /**
    * Note: If you use 3, it will take the newest stable available. Don't want that. We didn't test with that yet!
    */
-  public final static String API_VERSION = "3.30";
+  public final static String API_VERSION = "3.34";
 
   /**
    * private constructor
@@ -142,7 +142,8 @@ public class LoadApi {
 
   private static void load(Runnable onLoad, boolean sensor, ArrayList<LoadLibrary> loadLibraries, Language language,
       String otherParams) {
-    String op = "sensor=" + sensor;
+    //String op = "sensor=" + sensor;
+    String op = "";
     if (otherParams != null) {
       op += "&" + otherParams;
     }
