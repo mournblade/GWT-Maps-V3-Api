@@ -210,7 +210,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public StreetViewPanoramaImpl getStreetView() {
     return impl.getStreetView();
-  };
+  }
 
   /**
    * gets Returns the angle of incidence for aerial imagery (available for SATELLITE and HYBRID map types) measured in
@@ -219,14 +219,14 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public int getTilt() {
     return impl.getTilt();
-  };
+  }
 
   /**
    * get zoom
    */
   public int getZoom() {
     return impl.getZoom();
-  };
+  }
 
   /**
    * Changes the center of the map by the given distance in pixels. If the distance is less than both the width and
@@ -238,7 +238,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void panBy(int x, int y) {
     impl.panBy(x, y);
-  };
+  }
 
   /**
    * Changes the center of the map to the given LatLng. If the change is less than both the width and height of the map,
@@ -248,7 +248,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void panTo(LatLng latLng) {
     impl.panTo(latLng);
-  };
+  }
 
   /**
    * Pans the map by the minimum amount necessary to contain the given LatLngBounds. It makes no guarantee where on the
@@ -262,7 +262,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void panToBounds(LatLngBounds latLngBounds) {
     impl.panToBounds(latLngBounds);
-  };
+  }
 
   /**
    * set center
@@ -271,7 +271,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void setCenter(LatLng latlng) {
     impl.setCenter(latlng);
-  };
+  }
 
   /**
    * Sets the compass heading for aerial imagery measured in degrees from cardinal direction North.
@@ -280,7 +280,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void setHeading(int heading) {
     impl.setHeading(heading);
-  };
+  }
 
   /**
    * set MapTypeId
@@ -307,7 +307,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void setOptions(MapOptions options) {
     impl.setOptions(options);
-  };
+  }
 
   /**
    * Sets the angle of incidence for aerial imagery (available for SATELLITE and HYBRID map types) measured in degrees
@@ -318,7 +318,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void setStreetView(StreetViewPanoramaImpl panorama) {
     impl.setStreetView(panorama);
-  };
+  }
 
   /**
    * Sets the angle of incidence for aerial imagery (available for SATELLITE and HYBRID map types) measured in degrees
@@ -329,7 +329,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void setTilt(int tilt) {
     impl.setTilt(tilt);
-  };
+  }
 
   /**
    * sets map zoom
@@ -338,7 +338,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void setZoom(int zoom) {
     impl.setZoom(zoom);
-  };
+  }
 
   /**
    * TODO sets Additional controls to attach to the map. To add a control to the map, add the control's
@@ -348,7 +348,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void setControls(MVCArray<Element> controls) {
     impl.setControls(controls);
-  };
+  }
 
   /**
    * sets Additional controls to attach to the map. To add a control to the map, add the control's
@@ -359,7 +359,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void setControls(ControlPosition controlPosition, Element element) {
     impl.setControls(controlPosition, element);
-  };
+  }
 
   /**
    * sets Additional controls to attach to the map. To add a control to the map, add the control's
@@ -385,7 +385,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
 
     // add it to the map
     impl.setControls(controlPosition, mapPanel.getElement());
-  };
+  }
 
   /**
    * remove an pre-existing control so we don't get a mem leak
@@ -429,7 +429,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void setMapTypesRegistry(MapTypeRegistry mapTypes) {
     impl.setMapTypesRegistry(mapTypes);
-  };
+  }
 
   /**
    * Set the custom map type into the map's registry
@@ -446,7 +446,7 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public MapTypeRegistry getMapTypeRegistry() {
     return impl.getMapTypeRegistry();
-  };
+  }
 
   /**
    * TODO sets Additional map types to overlay.
@@ -455,14 +455,14 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public void setOverlayMapTypes(MVCArray<JavaScriptObject> overlayMapTypes) {
     impl.setOverlayMapTypes(overlayMapTypes);
-  };
+  }
 
   /**
    * TODO gets Additional map types to overlay.
    */
   public MVCArray<JavaScriptObject> getOverlayMapTypes() {
     return impl.getOverlayMapTypes();
-  };
+  }
 
   /**
    * This event is fired when the viewport bounds have changed.
@@ -492,6 +492,14 @@ public class MapWidget extends MVCObjectWidget<MapImpl> {
    */
   public HandlerRegistration addClickHandler(ClickMapHandler handler) {
     return impl.addClickHandler(handler);
+  }
+
+  public HandlerRegistration addDomListener(JavaScriptObject jso, ClickMapHandler handler, boolean capture) {
+    return MapImpl.addDomListener(jso, handler, capture);
+  }
+
+  public HandlerRegistration addDomListener(JavaScriptObject jso, ClickMapHandler handler) {
+    return MapImpl.addDomListener(jso, handler);
   }
 
   /**
