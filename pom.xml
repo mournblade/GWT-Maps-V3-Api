@@ -7,7 +7,7 @@
         <version>7</version>
     </parent>
 
-    <groupId>com.github.branflake2267</groupId>
+    <groupId>com.github.skyhawk-telematics</groupId>
     <artifactId>gwt-maps</artifactId>
     <version>3.10.0-alpha-8-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -20,12 +20,12 @@
 
     <name>GWT Maps API V3</name>
     <description>GWT library to access Google Maps javascript API</description>
-    <url>https://github.com/branflake2267/GWT-Maps-V3-Api/</url>
+    <url>https://github.com/skyhawk-telematics/GWT-Maps-V3-Api/</url>
     <inceptionYear>2011</inceptionYear>
 
     <organization>
         <name>GWT Maps API V3</name>
-        <url>https://github.com/branflake2267/GWT-Maps-V3-Api.git</url>
+        <url>https://github.com/skyhawk-telematics/GWT-Maps-V3-Api.git</url>
     </organization>
 
     <licenses>
@@ -37,20 +37,20 @@
 
     <issueManagement>
         <system>github</system>
-        <url>https://github.com/branflake2267/GWT-Maps-V3-Api</url>
+        <url>https://github.com/skyhawk-telematics/GWT-Maps-V3-Api</url>
     </issueManagement>
 
     <scm>
-        <connection>scm:git:git://github.com/branflake2267/GWT-Maps-V3-Api.git/</connection>
-        <developerConnection>scm:git:git@github.com:branflake2267/GWT-Maps-V3-Api.git</developerConnection>
-        <url>https://github.com/branflake2267/GWT-Maps-V3-Api.git</url>
+        <connection>scm:git:git://github.com/skyhawk-telematics/GWT-Maps-V3-Api.git/</connection>
+        <developerConnection>scm:git:git@github.com:skyhawk-telematics/GWT-Maps-V3-Api.git</developerConnection>
+        <url>https://github.com/skyhawk-telematics/GWT-Maps-V3-Api.git</url>
     </scm>
 
     <developers>
         <developer>
-            <id>branflake2267</id>
+            <id>skyhawk-telematics</id>
             <name>Brandon Donnelson</name>
-            <email>branflake2267@gmail.com</email>
+            <email>skyhawk-telematics@gmail.com</email>
             <organization>Gone Vertical LLC</organization>
             <organizationUrl>http://gonevertical.com</organizationUrl>
             <roles>
@@ -93,7 +93,7 @@
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
         <gae.home>${settings.localRepository}/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
 
-        <github.site.repositoryOwner>branflake2267</github.site.repositoryOwner>
+        <github.site.repositoryOwner>skyhawk-telematics</github.site.repositoryOwner>
         <github.site.repositoryName>GWT-Maps-V3-Api</github.site.repositoryName>
     </properties>
 
@@ -244,8 +244,8 @@
                             <!-- Show them the source -->
                             <div id="gitHeader" style="display:none;margin-top: 4px;position: absolute;right: 0px;" >
                               <span class="gh-section">Follow us on GitHub</span>
-                              <iframe src="http://ghbtns.com/github-btn.html?user=branflake2267&repo=GWT-Maps-V3-Api&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
-                              <iframe src="http://ghbtns.com/github-btn.html?user=branflake2267&repo=GWT-Maps-V3-Api&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
+                              <iframe src="http://ghbtns.com/github-btn.html?user=skyhawk-telematics&repo=GWT-Maps-V3-Api&type=fork&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
+                              <iframe src="http://ghbtns.com/github-btn.html?user=skyhawk-telematics&repo=GWT-Maps-V3-Api&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170px" height="30px"></iframe>
                             </div>
                             ]]>
                         </header>
