@@ -101,6 +101,10 @@ public class Polygon extends MVCObject<Polygon> {
     return this.getEditable();
   }-*/;
 
+  public final native boolean getDraggable() /*-{
+    return this.getDraggable();
+  }-*/;
+
   /**
    * Returns the map on which this shape is attached.
    */
@@ -134,6 +138,10 @@ public class Polygon extends MVCObject<Polygon> {
    */
   public final native void setEditable(boolean editable) /*-{
     this.setEditable(editable);
+  }-*/;
+
+  public final native void setDraggable(boolean draggable) /*-{
+    this.setDraggable(draggable);
   }-*/;
 
   /**

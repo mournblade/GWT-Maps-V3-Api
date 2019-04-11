@@ -46,6 +46,7 @@ public class PolygonOptions extends JavaScriptObject {
     setGeodesic(false);
     setVisible(true);
     setClickable(true);
+    setDraggable(false);
   }
 
   /**
@@ -81,6 +82,14 @@ public class PolygonOptions extends JavaScriptObject {
    */
   public final native boolean getEditable() /*-{
     return this.editable;
+  }-*/;
+
+  public final native void setDraggable(boolean draggable) /*-{
+    this.draggable = draggable;
+  }-*/;
+
+  public final native boolean getDraggable() /*-{
+    return this.draggable;
   }-*/;
 
   /**
