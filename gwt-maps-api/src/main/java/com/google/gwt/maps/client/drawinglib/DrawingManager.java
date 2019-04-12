@@ -75,11 +75,7 @@ public class DrawingManager extends MVCObject<DrawingManager> {
    */
   public final OverlayType getDrawingMode() {
     String type = getDrawingModeImpl();
-    if (type == null) {
-      return null;
-    } else {
-      return OverlayType.fromValue(type);
-    }
+    return type == null ? null : OverlayType.fromValue(type);
   }
 
   private final native String getDrawingModeImpl() /*-{
@@ -139,12 +135,32 @@ public class DrawingManager extends MVCObject<DrawingManager> {
   }
 
   /**
+   * This event is fired when the user has finished drawing a circle.
+   * 
+   * @param handler
+   */
+  public final HandlerRegistration addCircleCompleteHandlerOnce(CircleCompleteMapHandler handler) {
+    return MapHandlerRegistration.addHandlerDrawingOnce(this, MapEventType.CIRCLECOMPLETE, handler,
+        new CircleCompleteEventFormatter());
+  }
+
+  /**
    * This event is fired when the user has finished drawing a marker.
    * 
    * @param handler
    */
   public final HandlerRegistration addMarkerCompleteHandler(MarkerCompleteMapHandler handler) {
     return MapHandlerRegistration.addHandlerDrawing(this, MapEventType.MARKERCOMPLETE, handler,
+        new MarkerCompleteEventFormatter());
+  }
+
+  /**
+   * This event is fired when the user has finished drawing a marker.
+   * 
+   * @param handler
+   */
+  public final HandlerRegistration addMarkerCompleteHandlerOnce(MarkerCompleteMapHandler handler) {
+    return MapHandlerRegistration.addHandlerDrawingOnce(this, MapEventType.MARKERCOMPLETE, handler,
         new MarkerCompleteEventFormatter());
   }
 
@@ -169,6 +185,16 @@ public class DrawingManager extends MVCObject<DrawingManager> {
   }
 
   /**
+   * This event is fired when the user has finished drawing a polygon.
+   * 
+   * @param handler
+   */
+  public final HandlerRegistration addPolygonCompleteHandlerOnce(PolygonCompleteMapHandler handler) {
+    return MapHandlerRegistration.addHandlerDrawingOnce(this, MapEventType.POLYGONCOMPLETE, handler,
+        new PolygonCompleteEventFormatter());
+  }
+
+  /**
    * This event is fired when the user has finished drawing a polyline.
    * 
    * @param handler
@@ -179,12 +205,32 @@ public class DrawingManager extends MVCObject<DrawingManager> {
   }
 
   /**
+   * This event is fired when the user has finished drawing a polyline.
+   * 
+   * @param handler
+   */
+  public final HandlerRegistration addPolylineCompleteHandlerOnce(PolylineCompleteMapHandler handler) {
+    return MapHandlerRegistration.addHandlerDrawingOnce(this, MapEventType.POLYLINECOMPLETE, handler,
+        new PolylineCompleteEventFormatter());
+  }
+
+  /**
    * This event is fired when the user has finished drawing a rectangle.
    * 
    * @param handler
    */
   public final HandlerRegistration addRectangleCompleteHandler(RectangleCompleteMapHandler handler) {
     return MapHandlerRegistration.addHandlerDrawing(this, MapEventType.RECTANGLECOMPLETE, handler,
+        new RectangleCompleteEventFormatter());
+  }
+
+  /**
+   * This event is fired when the user has finished drawing a rectangle.
+   * 
+   * @param handler
+   */
+  public final HandlerRegistration addRectangleCompleteHandlerOnce(RectangleCompleteMapHandler handler) {
+    return MapHandlerRegistration.addHandlerDrawingOnce(this, MapEventType.RECTANGLECOMPLETE, handler,
         new RectangleCompleteEventFormatter());
   }
 
