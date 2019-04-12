@@ -80,8 +80,8 @@
 
     <properties>
         <!-- GWT -->
-        <gwt.version>2.5.0</gwt.version>
-        <gwt.maven.version>2.5.1</gwt.maven.version>
+        <gwt.version>2.8.2</gwt.version>
+        <gwt.maven.version>2.8.2</gwt.maven.version>
         <gae.version>1.9.1</gae.version>
         <gwt.style>OBF</gwt.style>
 
