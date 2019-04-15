@@ -43,7 +43,19 @@ public class RectangleOptions extends JavaScriptObject {
    * creates Rectangle options
    */
   public final static RectangleOptions newInstance() {
-    return JavaScriptObject.createObject().cast();
+    RectangleOptions obj = JavaScriptObject.createObject().cast();
+    obj.setDefaults();
+    return obj;
+  }
+
+  /**
+   * Set expected defaults
+   */
+  private void setDefaults() {
+    setVisible(true);
+    setClickable(true);
+    setEditable(false);
+    setDraggable(false);
   }
 
   /**
@@ -196,6 +208,39 @@ public class RectangleOptions extends JavaScriptObject {
    */
   public final native int getStrokeWeight() /*-{
     return this.strokeWeight;
+  }-*/;
+
+  /**
+   * Whether this rectangle is visible on the map. Defaults to <code>true</code>.
+   * 
+   * @param isVisible
+   */
+  public final native void setVisible(boolean isVisible) /*-{
+    this.visible = isVisible;
+  }-*/;
+
+  /**
+   * Whether this rectangle is visible on the map. Defaults to <code>true</code>.
+   * 
+   */
+  public final native boolean getVisible() /*-{
+    return this.visible;
+  }-*/;
+
+  public final native void setEditable(boolean isEditable) /*-{
+    this.editable = isEditable;
+  }-*/;
+
+  public final native boolean getEditable() /*-{
+    return this.editable;
+  }-*/;
+
+  public final native void setDraggable(boolean draggable) /*-{
+    this.draggable = draggable;
+  }-*/;
+
+  public final native boolean getDraggable() /*-{
+    return this.draggable;
   }-*/;
 
   /**
