@@ -87,6 +87,10 @@ public class Rectangle extends MVCObject<Rectangle> {
     return this.getEditable();
   }-*/;
 
+  public final native boolean getDraggable() /*-{
+    return this.getDraggable();
+  }-*/;
+
   /**
    * Renders the rectangle on the specified map. If map is set to null, the rectangle will be removed.
    * 
@@ -123,6 +127,10 @@ public class Rectangle extends MVCObject<Rectangle> {
    */
   public final native void setEditable(boolean editable) /*-{
     this.setEditable(editable);
+  }-*/;
+
+  public final native void setDraggable(boolean draggable) /*-{
+    this.setDraggable(draggable);
   }-*/;
 
   /**

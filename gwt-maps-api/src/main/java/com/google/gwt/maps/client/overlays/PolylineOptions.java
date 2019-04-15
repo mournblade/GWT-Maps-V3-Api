@@ -53,9 +53,11 @@ public class PolylineOptions extends JavaScriptObject {
    * Set expected defaults
    */
   private void setDefaults() {
-    this.setGeodesic(false);
-    this.setVisible(true);
-    this.setClickable(true);
+    setGeodesic(false);
+    setVisible(true);
+    setClickable(true);
+    setEditable(false);
+    setDraggable(false);
   }
 
   /**
@@ -253,6 +255,32 @@ public class PolylineOptions extends JavaScriptObject {
    */
   public final native boolean getVisible() /*-{
     return this.visible;
+  }-*/;
+
+  /**
+   * If set to true, the user can edit this shape by dragging the control points shown at the vertices and on each
+   * segment. Defaults to false.
+   * 
+   * @param isEditable
+   */
+  public final native void setEditable(boolean isEditable) /*-{
+    this.editable = isEditable;
+  }-*/;
+
+  /**
+   * Whether the user can edit this shape by dragging the control points shown at the vertices and on each segment.
+   * 
+   */
+  public final native boolean getEditable() /*-{
+    return this.editable;
+  }-*/;
+
+  public final native void setDraggable(boolean draggable) /*-{
+    this.draggable = draggable;
+  }-*/;
+
+  public final native boolean getDraggable() /*-{
+    return this.draggable;
   }-*/;
 
   /**
