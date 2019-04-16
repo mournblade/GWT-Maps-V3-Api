@@ -33,8 +33,14 @@ public class PolygonOptions extends JavaScriptObject {
   }
 
   public final static PolygonOptions newInstance() {
+    return newInstance(true);
+  }
+
+  public final static PolygonOptions newInstance(boolean withDefaults) {
     PolygonOptions obj = JavaScriptObject.createObject().cast();
-    obj.setDefaults();
+    if (withDefaults) {
+      obj.setDefaults();
+    }
     return obj;
   }
 
