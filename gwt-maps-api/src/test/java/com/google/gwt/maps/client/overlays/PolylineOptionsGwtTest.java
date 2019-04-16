@@ -119,9 +119,7 @@ public class PolylineOptionsGwtTest extends AbstractMapsGWTTestHelper {
 				left.setSize("500px", "500px");
 				RootPanel.get().add(left);
 				o.setMap(left);
-				@SuppressWarnings("deprecation")
-				final
-				MapWidget right = o.getMapWidget();
+				final MapWidget right = o.getMap();
 
 				assertLatLngEquals(left.getCenter(), right.getCenter());
 

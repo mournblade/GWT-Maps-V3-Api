@@ -148,18 +148,6 @@ public class DirectionsRendererOptions extends JavaScriptObject {
     return obj != null ? MapWidget.newInstance(obj) : null;
   }
 
-  /**
-   * Map on which to display the directions. <br>
-   * <br>
-   * See {@link #getMap()}.<br>
-   * Method will be removed in version 3.11
-   */
-  @Deprecated
-  public final MapWidget getMapWidget() {
-    MapImpl obj = getMapImpl();
-    return obj != null ? MapWidget.newInstance(obj) : null;
-  }
-
   private final native MapImpl getMapImpl() /*-{
     return this.map;
   }-*/;
