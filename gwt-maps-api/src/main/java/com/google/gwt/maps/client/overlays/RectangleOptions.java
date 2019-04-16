@@ -43,9 +43,15 @@ public class RectangleOptions extends JavaScriptObject {
    * creates Rectangle options
    */
   public final static RectangleOptions newInstance() {
-    RectangleOptions obj = JavaScriptObject.createObject().cast();
-    obj.setDefaults();
-    return obj;
+    return newInstance(true);
+  }
+
+  public final static RectangleOptions newInstance(boolean withDefaults) {
+    RectangleOptions options = JavaScriptObject.createObject().cast();
+    if (withDefaults) {
+      options.setDefaults();
+    }
+    return options;
   }
 
   /**
