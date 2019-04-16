@@ -99,6 +99,15 @@ public class DrawingManager extends MVCObject<DrawingManager> {
   }-*/;
 
   /**
+   * set Options
+   * 
+   * @param options
+   */
+  public final native void setOptions(DrawingManagerOptions options) /*-{
+    this.setOptions(options);
+  }-*/;
+
+  /**
    * Attaches the DrawingManager object to the specified Map.
    * 
    * @param mapWidget

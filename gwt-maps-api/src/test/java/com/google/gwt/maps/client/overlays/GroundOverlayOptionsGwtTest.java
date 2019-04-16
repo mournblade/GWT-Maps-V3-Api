@@ -104,8 +104,7 @@ public class GroundOverlayOptionsGwtTest extends AbstractMapsGWTTestHelper {
         left.setSize("500px", "500px");
         RootPanel.get().add(left);
         o.setMap(left);
-        @SuppressWarnings("deprecation")
-        MapWidget right = o.getMapWidget();
+        MapWidget right = o.getMap();
         assertLatLngEquals(left.getCenter(), right.getCenter());
         finishTest();
       }

@@ -147,17 +147,6 @@ public class RectangleOptions extends JavaScriptObject {
     return obj != null ? MapWidget.newInstance(obj) : null;
   }
 
-  /**
-   * Gets Map on which to display Polyline. <br>
-   * See {@link #getMap()}.<br>
-   * Method will be removed in version 3.11
-   */
-  @Deprecated
-  public final MapWidget getMapWidget() {
-    MapImpl obj = getMapImpl();
-    return obj != null ? MapWidget.newInstance(obj) : null;
-  }
-
   private final native MapImpl getMapImpl() /*-{
     return this.map;
   }-*/;

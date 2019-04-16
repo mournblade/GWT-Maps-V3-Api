@@ -70,10 +70,10 @@ public class PolygonOptions extends JavaScriptObject {
    * If set to true, the user can edit this shape by dragging the control points shown at the vertices and on each
    * segment. Defaults to false.
    * 
-   * @param isEditable
+   * @param editable
    */
-  public final native void setEditable(boolean isEditable) /*-{
-    this.editable = isEditable;
+  public final native void setEditable(boolean editable) /*-{
+    this.editable = editable;
   }-*/;
 
   /**
@@ -93,7 +93,7 @@ public class PolygonOptions extends JavaScriptObject {
   }-*/;
 
   /**
-   * sets Indicates whether this Polyline handles click events. Defaults to true.
+   * sets Indicates whether this Polygon handles click events. Defaults to true.
    * 
    * @param clickable
    */
@@ -102,7 +102,7 @@ public class PolygonOptions extends JavaScriptObject {
   }-*/;
 
   /**
-   * gets Indicates whether this Polyline handles click events. Defaults to true.
+   * gets Indicates whether this Polygon handles click events. Defaults to true.
    */
   public final native boolean getClickable() /*-{
     return this.clickable;
@@ -161,7 +161,7 @@ public class PolygonOptions extends JavaScriptObject {
   }-*/;
 
   /**
-   * Renders the Polygone on the map
+   * Renders the Polygon on the map
    * 
    * @param mapWidget
    */
@@ -178,20 +178,9 @@ public class PolygonOptions extends JavaScriptObject {
   }-*/;
 
   /**
-   * Gets Map on which to display Polyline.
+   * Gets Map on which to display Polygon.
    */
   public final MapWidget getMap() {
-    MapImpl obj = getMapImpl();
-    return obj != null ? MapWidget.newInstance(obj) : null;
-  }
-
-  /**
-   * Gets Map on which to display Polyline. <br>
-   * See {@link #getMap()}.<br>
-   * Method will be removed in version 3.11
-   */
-  @Deprecated
-  public final MapWidget getMapWidget() {
     MapImpl obj = getMapImpl();
     return obj != null ? MapWidget.newInstance(obj) : null;
   }
@@ -204,7 +193,7 @@ public class PolygonOptions extends JavaScriptObject {
    * The ordered sequence of coordinates that designates a closed loop. Unlike polygons, a polygon may consist of one or
    * more paths. As a result, the paths property may specify one or more arrays of LatLng coordinates. Simple polygons
    * may be defined using a single array of LatLngs. More complex polygons may specify an array of arrays. Any simple
-   * arrays are convered into MVCArrays. Inserting or removing LatLngs from the MVCArray will automatically update the
+   * arrays are converted into MVCArrays. Inserting or removing LatLngs from the MVCArray will automatically update the
    * polygon on the map.
    * 
    * @param paths
@@ -221,7 +210,7 @@ public class PolygonOptions extends JavaScriptObject {
    * The ordered sequence of coordinates that designates a closed loop. Unlike polygons, a polygon may consist of one or
    * more paths. As a result, the paths property may specify one or more arrays of LatLng coordinates. Simple polygons
    * may be defined using a single array of LatLngs. More complex polygons may specify an array of arrays. Any simple
-   * arrays are convered into MVCArrays. Inserting or removing LatLngs from the MVCArray will automatically update the
+   * arrays are converted into MVCArrays. Inserting or removing LatLngs from the MVCArray will automatically update the
    * polygon on the map.
    * 
    * @param paths
@@ -238,7 +227,7 @@ public class PolygonOptions extends JavaScriptObject {
    * The ordered sequence of coordinates that designates a closed loop. Unlike polygons, a polygon may consist of one or
    * more paths. As a result, the paths property may specify one or more arrays of LatLng coordinates. Simple polygons
    * may be defined using a single array of LatLngs. More complex polygons may specify an array of arrays. Any simple
-   * arrays are convered into MVCArrays. Inserting or removing LatLngs from the MVCArray will automatically update the
+   * arrays are converted into MVCArrays. Inserting or removing LatLngs from the MVCArray will automatically update the
    * polygon on the map.
    * 
    * @param paths
@@ -255,7 +244,7 @@ public class PolygonOptions extends JavaScriptObject {
    * The ordered sequence of coordinates that designates a closed loop. Unlike polygons, a polygon may consist of one or
    * more paths. As a result, the paths property may specify one or more arrays of LatLng coordinates. Simple polygons
    * may be defined using a single array of LatLngs. More complex polygons may specify an array of arrays. Any simple
-   * arrays are convered into MVCArrays. Inserting or removing LatLngs from the MVCArray will automatically update the
+   * arrays are converted into MVCArrays. Inserting or removing LatLngs from the MVCArray will automatically update the
    * polygon on the map.
    * 
    * @param paths

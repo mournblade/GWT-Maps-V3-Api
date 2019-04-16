@@ -75,7 +75,7 @@ public class GroundOverlayOptions extends JavaScriptObject {
   }-*/;
 
   /**
-   * sets Indicates whether this Polyline handles click events. Defaults to true.
+   * sets Indicates whether this GroundOverlay handles click events. Defaults to true.
    * 
    * @param clickable
    */
@@ -84,14 +84,14 @@ public class GroundOverlayOptions extends JavaScriptObject {
   }-*/;
 
   /**
-   * gets Indicates whether this Polyline handles click events. Defaults to true.
+   * gets Indicates whether this GroundOverlay handles click events. Defaults to true.
    */
   public final native boolean getClickable() /*-{
     return this.clickable;
   }-*/;
 
   /**
-   * sets Map on which to display Polyline.
+   * sets Map on which to display GroundOverlay.
    * 
    * @param mapWidget
    */
@@ -108,21 +108,9 @@ public class GroundOverlayOptions extends JavaScriptObject {
   }-*/;
 
   /**
-   * gets Map on which to display Polyline.
+   * gets Map on which to display GroundOverlay.
    */
   public final MapWidget getMap() {
-    MapImpl obj = getMapImpl();
-    return obj != null ? MapWidget.newInstance(obj) : null;
-  }
-
-  /**
-   * gets Map on which to display Polyline. <br>
-   * <br>
-   * See {@link #getMap()}.<br>
-   * Method will be removed in version 3.11
-   */
-  @Deprecated
-  public final MapWidget getMapWidget() {
     MapImpl obj = getMapImpl();
     return obj != null ? MapWidget.newInstance(obj) : null;
   }
