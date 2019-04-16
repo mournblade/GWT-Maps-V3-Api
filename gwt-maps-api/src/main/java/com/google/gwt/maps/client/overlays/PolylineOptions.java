@@ -44,9 +44,15 @@ public class PolylineOptions extends JavaScriptObject {
    * creates a new instance of options
    */
   public final static PolylineOptions newInstance() {
-    PolylineOptions obj = JavaScriptObject.createObject().cast();
-    obj.setDefaults();
-    return obj;
+    return newInstance(true);
+  }
+
+  public final static PolylineOptions newInstance(boolean withDefaults) {
+    PolylineOptions options = JavaScriptObject.createObject().cast();
+    if (withDefaults) {
+      options.setDefaults();
+    }
+    return options;
   }
 
   /**
