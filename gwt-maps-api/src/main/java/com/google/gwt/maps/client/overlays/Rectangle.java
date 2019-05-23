@@ -133,6 +133,10 @@ public class Rectangle extends MVCObject<Rectangle> {
     this.setDraggable(draggable);
   }-*/;
 
+  public final native void setVisible(boolean visible) /*-{
+    this.setVisible(visible);
+  }-*/;
+
   /**
    * sets the Rectangle options
    * 
