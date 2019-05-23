@@ -32,6 +32,10 @@ import com.google.gwt.maps.client.events.click.ClickEventFormatter;
 import com.google.gwt.maps.client.events.click.ClickMapHandler;
 import com.google.gwt.maps.client.events.dblclick.DblClickEventFormatter;
 import com.google.gwt.maps.client.events.dblclick.DblClickMapHandler;
+import com.google.gwt.maps.client.events.dragend.DragEndEventFormatter;
+import com.google.gwt.maps.client.events.dragend.DragEndMapHandler;
+import com.google.gwt.maps.client.events.insertat.InsertAtEventFormatter;
+import com.google.gwt.maps.client.events.insertat.InsertAtMapHandler;
 import com.google.gwt.maps.client.events.mousedown.MouseDownEventFormatter;
 import com.google.gwt.maps.client.events.mousedown.MouseDownMapHandler;
 import com.google.gwt.maps.client.events.mousemove.MouseMoveEventFormatter;
@@ -42,8 +46,12 @@ import com.google.gwt.maps.client.events.mouseover.MouseOverEventFormatter;
 import com.google.gwt.maps.client.events.mouseover.MouseOverMapHandler;
 import com.google.gwt.maps.client.events.mouseup.MouseUpEventFormatter;
 import com.google.gwt.maps.client.events.mouseup.MouseUpMapHandler;
+import com.google.gwt.maps.client.events.removeat.RemoveAtEventFormatter;
+import com.google.gwt.maps.client.events.removeat.RemoveAtMapHandler;
 import com.google.gwt.maps.client.events.rightclick.RightClickEventFormatter;
 import com.google.gwt.maps.client.events.rightclick.RightClickMapHandler;
+import com.google.gwt.maps.client.events.setat.SetAtEventFormatter;
+import com.google.gwt.maps.client.events.setat.SetAtMapHandler;
 import com.google.gwt.maps.client.mvc.MVCArray;
 import com.google.gwt.maps.client.mvc.MVCObject;
 
@@ -296,4 +304,19 @@ public class Polygon extends MVCObject<Polygon> {
     return MapHandlerRegistration.addHandler(this, MapEventType.RIGHTCLICK, handler, new RightClickEventFormatter());
   }
 
+  public final HandlerRegistration addSetAtHandler(SetAtMapHandler handler) {
+    return MapHandlerRegistration.addHandler(this.getPath(), MapEventType.SET_AT, handler, new SetAtEventFormatter());
+  }
+
+  public final HandlerRegistration addRemoveAtHandler(RemoveAtMapHandler handler) {
+    return MapHandlerRegistration.addHandler(this.getPath(), MapEventType.REMOVE_AT, handler, new RemoveAtEventFormatter());
+  }
+
+  public final HandlerRegistration addInsertAtHandler(InsertAtMapHandler handler) {
+    return MapHandlerRegistration.addHandler(this.getPath(), MapEventType.INSERT_AT, handler, new InsertAtEventFormatter());
+  }
+
+  public final HandlerRegistration addDragEndHandler(DragEndMapHandler handler) {
+    return MapHandlerRegistration.addHandler(this, MapEventType.DRAGEND, handler, new DragEndEventFormatter());
+  }
 }
