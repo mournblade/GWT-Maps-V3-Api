@@ -1,10 +1,10 @@
-package com.google.gwt.maps.client.events;
+package com.google.gwt.maps.client.events.click;
 
 /*
  * #%L
  * GWT Maps API V3 - Core API
  * %%
- * Copyright (C) 2011 - 2012 GWT Maps API V3
+ * Copyright (C) 2011 - 2019 GWT Maps API V3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,27 +20,9 @@ package com.google.gwt.maps.client.events;
  * #L%
  */
 
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Widget;
 
-public class MapPanel extends FlowPanel {
+import com.google.gwt.maps.client.events.MapHandler;
 
-  public MapPanel() {
-    super();
-  }
-
-  @Override
-  public void onAttach() {
-    super.onAttach();
-  }
-
-  /**
-   * todo only do this once, b/c other wise it probably won't act right adding it over and over
-   */
-  @Override
-  public void add(Widget child) {
-    super.add(child);
-    onAttach();
-  }
+public interface GlobalClickMapHandler extends MapHandler<GlobalClickMapEvent> {
 
 }

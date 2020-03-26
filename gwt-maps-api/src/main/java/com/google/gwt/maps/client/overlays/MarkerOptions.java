@@ -168,6 +168,14 @@ public class MarkerOptions extends JavaScriptObject {
     return this.icon;
   }-*/;
 
+  public final native void setIcon(Symbol icon) /*-{
+    this.icon = icon;
+  }-*/;
+
+  public final native Symbol getIcon() /*-{
+    return this.icon;
+  }-*/;
+
   /**
    * sets Map on which to display Polyline.
    * 
@@ -189,18 +197,6 @@ public class MarkerOptions extends JavaScriptObject {
    * Gets Map on which to display Polyline.
    */
   public final MapWidget getMap() {
-    MapImpl obj = getMapImpl();
-    return obj != null ? MapWidget.newInstance(obj) : null;
-  }
-
-  /**
-   * Gets Map on which to display Polyline. <br>
-   * <br>
-   * See {@link #getMap()}.<br>
-   * Method will be removed in version 3.11
-   */
-  @Deprecated
-  public final MapWidget getMapWidget() {
     MapImpl obj = getMapImpl();
     return obj != null ? MapWidget.newInstance(obj) : null;
   }

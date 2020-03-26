@@ -22,6 +22,7 @@ package com.google.gwt.maps.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.maps.client.base.LatLng;
 import com.google.gwt.maps.client.base.LatLngBounds;
@@ -448,6 +449,14 @@ public class MapImpl extends MVCObject<MapImpl> {
    */
   public final HandlerRegistration addClickHandler(ClickMapHandler handler) {
     return MapHandlerRegistration.addHandler(this, MapEventType.CLICK, handler, new ClickEventFormatter());
+  }
+
+  public final static HandlerRegistration addDomListener(JavaScriptObject jso, ClickMapHandler handler) {
+    return MapHandlerRegistration.addDomListener(jso, ClickEvent.getType(), handler);
+  }
+
+  public final static HandlerRegistration addDomListener(JavaScriptObject jso, ClickMapHandler handler, boolean capture) {
+    return MapHandlerRegistration.addDomListener(jso, ClickEvent.getType(), handler, capture);
   }
 
   /**

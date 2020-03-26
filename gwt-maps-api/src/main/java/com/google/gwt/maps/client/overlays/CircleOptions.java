@@ -43,7 +43,19 @@ public class CircleOptions extends JavaScriptObject {
    * creates Circle options
    */
   public final static CircleOptions newInstance() {
-    return JavaScriptObject.createObject().cast();
+    CircleOptions obj = JavaScriptObject.createObject().cast();
+    obj.setDefaults();
+    return obj;
+  }
+
+  /**
+   * Set expected defaults
+   */
+  private void setDefaults() {
+    setVisible(true);
+    setClickable(true);
+    setEditable(false);
+    setDraggable(false);
   }
 
   /**
@@ -135,18 +147,6 @@ public class CircleOptions extends JavaScriptObject {
     return obj != null ? MapWidget.newInstance(obj) : null;
   }
 
-  /**
-   * Gets Map on which to display Polyline. <br>
-   * <br>
-   * See {@link #getMap()}.<br>
-   * Method will be removed in version 3.11
-   */
-  @Deprecated
-  public final MapWidget getMapWidget() {
-    MapImpl obj = getMapImpl();
-    return obj != null ? MapWidget.newInstance(obj) : null;
-  }
-
   private final native MapImpl getMapImpl() /*-{
     return this.map;
   }-*/;
@@ -213,6 +213,39 @@ public class CircleOptions extends JavaScriptObject {
    */
   public final native int getStrokeWeight() /*-{
     return this.strokeWeight;
+  }-*/;
+
+  /**
+   * Whether this circle is visible on the map. Defaults to <code>true</code>.
+   * 
+   * @param isVisible
+   */
+  public final native void setVisible(boolean isVisible) /*-{
+    this.visible = isVisible;
+  }-*/;
+
+  /**
+   * Whether this circle is visible on the map. Defaults to <code>true</code>.
+   * 
+   */
+  public final native boolean getVisible() /*-{
+    return this.visible;
+  }-*/;
+
+  public final native void setEditable(boolean isEditable) /*-{
+    this.editable = isEditable;
+  }-*/;
+
+  public final native boolean getEditable() /*-{
+    return this.editable;
+  }-*/;
+
+  public final native void setDraggable(boolean draggable) /*-{
+    this.draggable = draggable;
+  }-*/;
+
+  public final native boolean getDraggable() /*-{
+    return this.draggable;
   }-*/;
 
   /**

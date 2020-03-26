@@ -106,6 +106,10 @@ public class Circle extends MVCObject<Circle> {
     return this.getEditable();
   }-*/;
 
+  public final native boolean getDraggable() /*-{
+    return this.getDraggable();
+  }-*/;
+
   /**
    * Renders the circle on the specified map. If map is set to null, the circle will be removed.
    * 
@@ -141,6 +145,10 @@ public class Circle extends MVCObject<Circle> {
    */
   public final native void setEditable(boolean editable) /*-{
     this.setEditable(editable);
+  }-*/;
+
+  public final native void setDraggable(boolean draggable) /*-{
+    this.setDraggable(draggable);
   }-*/;
 
   /**

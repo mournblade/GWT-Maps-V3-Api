@@ -157,8 +157,7 @@ public class MarkerOptionsGwtTest extends AbstractMapsGWTTestHelper {
         RootPanel.get().add(fp);
         MapWidget left = new MapWidget(options);
         o.setMap(left);
-        @SuppressWarnings("deprecation")
-        MapWidget right = o.getMapWidget();
+        MapWidget right = o.getMap();
         assertLatLngEquals(left.getCenter(), right.getCenter());
         finishTest();
       }

@@ -47,13 +47,19 @@ public class DrawingManagerOptions extends JavaScriptObject {
    * Options for the drawing manager.
    */
   public static final DrawingManagerOptions newInstance() {
-    DrawingManagerOptions obj = JavaScriptObject.createObject().cast();
-    return setDefaults(obj);
+    return newInstance(true);
   }
 
-  private static DrawingManagerOptions setDefaults(DrawingManagerOptions obj) {
-    obj.setDrawingControl(true);
-    return obj;
+  public final static DrawingManagerOptions newInstance(boolean withDefaults) {
+    DrawingManagerOptions options = JavaScriptObject.createObject().cast();
+    if (withDefaults) {
+      options.setDefaults();
+    }
+    return options;
+  }
+
+  private void setDefaults() {
+    setDrawingControl(true);
   }
 
   /**

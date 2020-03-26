@@ -2,9 +2,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.branflake2267</groupId>
+        <groupId>com.nuba</groupId>
         <artifactId>gwt-maps</artifactId>
-        <version>3.10.0-alpha-8-SNAPSHOT</version>
+        <version>3.10.0-alpha-101-SNAPSHOT</version>
     </parent>
 
     <artifactId>gwt-maps-utility</artifactId>

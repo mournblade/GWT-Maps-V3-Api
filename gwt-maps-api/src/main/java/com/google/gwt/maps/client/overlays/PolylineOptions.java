@@ -44,18 +44,26 @@ public class PolylineOptions extends JavaScriptObject {
    * creates a new instance of options
    */
   public final static PolylineOptions newInstance() {
-    PolylineOptions obj = JavaScriptObject.createObject().cast();
-    obj.setDefaults();
-    return obj;
+    return newInstance(true);
+  }
+
+  public final static PolylineOptions newInstance(boolean withDefaults) {
+    PolylineOptions options = JavaScriptObject.createObject().cast();
+    if (withDefaults) {
+      options.setDefaults();
+    }
+    return options;
   }
 
   /**
    * Set expected defaults
    */
   private void setDefaults() {
-    this.setGeodesic(false);
-    this.setVisible(true);
-    this.setClickable(true);
+    setGeodesic(false);
+    setVisible(true);
+    setClickable(true);
+    setEditable(false);
+    setDraggable(false);
   }
 
   /**
@@ -131,17 +139,6 @@ public class PolylineOptions extends JavaScriptObject {
    * Gets Map on which to display Polyline.
    */
   public final MapWidget getMap() {
-    MapImpl obj = getMapImpl();
-    return obj != null ? MapWidget.newInstance(obj) : null;
-  }
-
-  /**
-   * Gets Map on which to display Polyline. <br>
-   * See {@link #getMap()}.<br>
-   * Method will be removed in version 3.11
-   */
-  @Deprecated
-  public final MapWidget getMapWidget() {
     MapImpl obj = getMapImpl();
     return obj != null ? MapWidget.newInstance(obj) : null;
   }
@@ -253,6 +250,32 @@ public class PolylineOptions extends JavaScriptObject {
    */
   public final native boolean getVisible() /*-{
     return this.visible;
+  }-*/;
+
+  /**
+   * If set to true, the user can edit this shape by dragging the control points shown at the vertices and on each
+   * segment. Defaults to false.
+   * 
+   * @param isEditable
+   */
+  public final native void setEditable(boolean isEditable) /*-{
+    this.editable = isEditable;
+  }-*/;
+
+  /**
+   * Whether the user can edit this shape by dragging the control points shown at the vertices and on each segment.
+   * 
+   */
+  public final native boolean getEditable() /*-{
+    return this.editable;
+  }-*/;
+
+  public final native void setDraggable(boolean draggable) /*-{
+    this.draggable = draggable;
+  }-*/;
+
+  public final native boolean getDraggable() /*-{
+    return this.draggable;
   }-*/;
 
   /**
