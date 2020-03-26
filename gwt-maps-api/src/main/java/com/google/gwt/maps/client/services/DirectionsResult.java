@@ -35,46 +35,54 @@ import com.google.gwt.core.client.JsArray;
  */
 public class DirectionsResult extends JavaScriptObject {
 
-  /**
-   * use newInstance();
-   */
-  protected DirectionsResult() {
-  }
+    /**
+     * use newInstance();
+     */
+    protected DirectionsResult() {
+    }
 
-  /**
-   * An array of DirectionsRoutes, each of which contains information about the legs and steps of which it is composed.
-   * There will only be one route unless the DirectionsRequest was made with provideRouteAlternatives set to true. (This
-   * property was formerly known as "trips".)
-   */
-  public static final DirectionsResult newInstance() {
-    DirectionsResult obj = JavaScriptObject.createObject().cast();
+    /**
+     * An array of DirectionsRoutes, each of which contains information about the legs and steps of which it is composed.
+     * There will only be one route unless the DirectionsRequest was made with provideRouteAlternatives set to true. (This
+     * property was formerly known as "trips".)
+     */
+    public static final DirectionsResult newInstance() {
+        DirectionsResult obj = JavaScriptObject.createObject().cast();
 
-    // needs a value, even if empty, so that DirectionsRenderer can be
-    // passed this obj without failing
-    JsArray<DirectionsRoute> emptyArray = ArrayHelper.toJsArray(new DirectionsRoute[] {});
-    obj.setRoutes(emptyArray);
+        // needs a value, even if empty, so that DirectionsRenderer can be
+        // passed this obj without failing
+        JsArray<DirectionsRoute> emptyArray = ArrayHelper.toJsArray(new DirectionsRoute[]{});
+        obj.setRoutes(emptyArray);
 
-    return obj;
-  }
+        return obj;
+    }
 
-  /**
-   * An array of DirectionsRoutes, each of which contains information about the legs and steps of which it is composed.
-   * There will only be one route unless the DirectionsRequest was made with provideRouteAlternatives set to true. (This
-   * property was formerly known as "trips".)
-   * 
-   * @param routes
-   */
-  public final native void setRoutes(JsArray<DirectionsRoute> routes) /*-{
-    this.routes = routes;
-  }-*/;
+    /**
+     * An array of DirectionsRoutes, each of which contains information about the legs and steps of which it is composed.
+     * There will only be one route unless the DirectionsRequest was made with provideRouteAlternatives set to true. (This
+     * property was formerly known as "trips".)
+     *
+     * @param routes
+     */
+    public final native void setRoutes(JsArray<DirectionsRoute> routes) /*-{
+        this.routes = routes;
+    }-*/;
 
-  /**
-   * An array of DirectionsRoutes, each of which contains information about the legs and steps of which it is composed.
-   * There will only be one route unless the DirectionsRequest was made with provideRouteAlternatives set to true. (This
-   * property was formerly known as "trips".)
-   */
-  public final native JsArray<DirectionsRoute> getRoutes() /*-{
-    return this.routes;
-  }-*/;
+    /**
+     * An array of DirectionsRoutes, each of which contains information about the legs and steps of which it is composed.
+     * There will only be one route unless the DirectionsRequest was made with provideRouteAlternatives set to true. (This
+     * property was formerly known as "trips".)
+     */
+    public final native JsArray<DirectionsRoute> getRoutes() /*-{
+        return this.routes;
+    }-*/;
+
+    public final native DirectionsRequest getRequest() /*-{
+        return this.request;
+    }-*/;
+
+    public final native void setRequest(DirectionsRequest request) /*-{
+        this.request = request;
+    }-*/;
 
 }

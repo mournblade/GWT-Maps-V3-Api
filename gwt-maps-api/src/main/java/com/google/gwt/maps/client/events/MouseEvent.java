@@ -35,7 +35,7 @@ public class MouseEvent {
   /**
    * {@link LatLng}
    */
-  private LatLng latLng;
+  protected LatLng latLng;
 
   /**
    * Create a new MouseEvent from properties of the map event call back
