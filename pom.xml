@@ -9,7 +9,7 @@
 
     <groupId>com.nuba</groupId>
     <artifactId>gwt-maps</artifactId>
-    <version>3.10.0-alpha-101-SNAPSHOT</version>
+    <version>3.40.0</version>
     <packaging>pom</packaging>
 
     <modules>
