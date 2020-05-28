@@ -42,7 +42,7 @@ public abstract class AbstractMapsGWTTestHelper extends GWTTestCase {
 
   /**
    * Runs the test with libraries defined by the {@link #getLibraries()} override loaded and fails if not complete by
-   * {@link #getAsyncDelayMs()}.<br>             "key=AIzaSyB8JF7nkgdz1CMbvJhmPL8rCKEXwyx3blk"
+   * {@link #getAsyncDelayMs()}.<br>
    * <br>
    * <b>NOTE:</b> You must call {@link #finishTest()} or test will fail.
    * 
@@ -54,7 +54,7 @@ public abstract class AbstractMapsGWTTestHelper extends GWTTestCase {
 
   /**
    * Runs the test with libraries defined by the {@link #getLibraries()} override loaded and fails if not complete by
-   * {@link #getAsyncDelayMs()}.<br>             "key=AIzaSyB8JF7nkgdz1CMbvJhmPL8rCKEXwyx3blk"
+   * {@link #getAsyncDelayMs()}.<br>
    * <br>
    * <b>NOTE:</b> You must call {@link #finishTest()} or test will fail.
    *
