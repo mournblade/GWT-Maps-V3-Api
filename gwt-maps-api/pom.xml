@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.nuba</groupId>
         <artifactId>gwt-maps</artifactId>
-        <version>3.40.0</version>
+        <version>3.41.0</version>
     </parent>
 
     <artifactId>gwt-maps-api</artifactId>

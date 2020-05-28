@@ -42,19 +42,32 @@ public abstract class AbstractMapsGWTTestHelper extends GWTTestCase {
 
   /**
    * Runs the test with libraries defined by the {@link #getLibraries()} override loaded and fails if not complete by
-   * {@link #getAsyncDelayMs()}.<br>
+   * {@link #getAsyncDelayMs()}.<br>             "key=AIzaSyB8JF7nkgdz1CMbvJhmPL8rCKEXwyx3blk"
    * <br>
    * <b>NOTE:</b> You must call {@link #finishTest()} or test will fail.
    * 
    * @param test code to run
    */
   public final void asyncLibTest(Runnable test) {
+    asyncLibTest(test, null);
+  }
+
+  /**
+   * Runs the test with libraries defined by the {@link #getLibraries()} override loaded and fails if not complete by
+   * {@link #getAsyncDelayMs()}.<br>             "key=AIzaSyB8JF7nkgdz1CMbvJhmPL8rCKEXwyx3blk"
+   * <br>
+   * <b>NOTE:</b> You must call {@link #finishTest()} or test will fail.
+   *
+   * @param test code to run
+   * @param otherParams any additional parameters, for example apikey
+   */
+  public final void asyncLibTest(Runnable test, String otherParams) {
     // handle the nulls
     LoadLibrary[] libs = getLibraries();
     if (libs == null) {
-      libs = new LoadLibrary[] {};
+      libs = new LoadLibrary[]{};
     }
-    asyncLibTest(test, libs);
+    asyncLibTest(test, otherParams, libs);
   }
 
   /**
@@ -63,15 +76,16 @@ public abstract class AbstractMapsGWTTestHelper extends GWTTestCase {
    * <b>NOTE:</b> You must call {@link #finishTest()} or test will fail.
    * 
    * @param test code to run
+   * @param otherParams any additional parameters, for example apikey
    * @param libs libraries to have loaded
    */
-  public final void asyncLibTest(Runnable test, LoadLibrary... libs) {
+  public final void asyncLibTest(Runnable test, String otherParams, LoadLibrary... libs) {
     // pack
     ArrayList<LoadLibrary> loadLibraries = new ArrayList<LoadLibrary>();
     loadLibraries.addAll(Arrays.asList(libs));
 
     // run
-    LoadApi.go(test, loadLibraries, isSensor());
+    LoadApi.go(test, loadLibraries, isSensor(), otherParams);
 
     // ensure expiration is does not reach finishTest()
     delayTest();

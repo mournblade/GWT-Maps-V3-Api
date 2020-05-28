@@ -20,8 +20,7 @@ package com.google.gwt.maps.testing.client.maps;
  * #L%
  */
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.*;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
@@ -37,12 +36,16 @@ import com.google.gwt.maps.client.placeslib.PlaceSearchPagination;
 import com.google.gwt.maps.client.placeslib.PlaceSearchRequest;
 import com.google.gwt.maps.client.placeslib.PlacesService;
 import com.google.gwt.maps.client.placeslib.PlacesServiceStatus;
+import com.google.gwt.maps.client.placeslib.placeresult.PlaceResultOpeningHours;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class PlaceSearchMapWidget extends Composite {
+
+  private static double STHLM_LAT = 59.332790;
+  private static double STHLM_LON = 18.064490;
 
   private final VerticalPanel pWidget;
   private MapWidget mapWidget;
@@ -58,7 +61,7 @@ public class PlaceSearchMapWidget extends Composite {
     pWidget.clear();
     pWidget.add(new HTML("<br>Click on the map to start the PlaceSearchRequest"));
 
-    drawMap();
+    drawMap(STHLM_LAT, STHLM_LON);
   }
 
   private void searchRequest(LatLng clickLocation) {
@@ -68,6 +71,7 @@ public class PlaceSearchMapWidget extends Composite {
     PlaceSearchRequest request = PlaceSearchRequest.newInstance();
     request.setLocation(clickLocation);
     request.setRadius(500d);
+    request.setName("Mcdonalds");
     // TODO add more AutocompleteTypes...
     // request.setTypes(AutocompleteType.ESTABLISHMENT);
     request.setTypes(types);
@@ -79,7 +83,7 @@ public class PlaceSearchMapWidget extends Composite {
       public void onCallback(JsArray<PlaceResult> results, PlaceSearchPagination pagination, PlacesServiceStatus status) {
 
         if (status == PlacesServiceStatus.OK) {
-          Window.alert("I found this many places " + results.length());
+          GWT.log("I found this many places " + results.length());
 
           // look up the details for the first place
           if (results.length() > 0) {
@@ -110,21 +114,29 @@ public class PlaceSearchMapWidget extends Composite {
     placeService.getDetails(request, new PlaceDetailsHandler() {
       @Override
       public void onCallback(PlaceResult result, PlacesServiceStatus status) {
+        PlaceResultOpeningHours openingHours = result.getOpeningHours();
+        JsDate isClosedTime = JsDate.create(2020, 4, 28, 4, 0, 0);
+        JsDate isOpenTime = JsDate.create(2020, 4, 28, 12, 0, 0);
+        GWT.log(result.getName() + " is open now: " + openingHours.getIsOpen());
+        GWT.log(result.getName() + " should be closed at " + isClosedTime.toLocaleString() + " : " + !openingHours.getIsOpenAtTime(isClosedTime));
+        GWT.log(result.getName() + " should be open at " + isOpenTime.toLocaleString() + " : " + openingHours.getIsOpenAtTime(isOpenTime));
+        GWT.log(result.getName() + " utc offset: " + result.getUtcOffset());
         if (status == PlacesServiceStatus.OK) {
           Window.alert("Found place details: name=" + result.getName());
         } else {
           String json = new JSONObject(result).toString();
-          System.out.println("details=" + json);
+          GWT.log("details=" + json);
           Window.alert("Status is: status=" + status + " ::: " + json);
         }
       }
     });
+    
   }
 
-  private void drawMap() {
-    LatLng center = LatLng.newInstance(47.60346, -122.33571);
+  private void drawMap(double lat, double lon) {
+    LatLng center = LatLng.newInstance(lat, lon);
     MapOptions opts = MapOptions.newInstance();
-    opts.setZoom(16);
+    opts.setZoom(20);
     opts.setCenter(center);
     opts.setMapTypeId(MapTypeId.HYBRID);
 

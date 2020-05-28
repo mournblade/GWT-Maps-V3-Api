@@ -336,7 +336,7 @@ public class PlaceResult extends JavaScriptObject {
      * from UTC).
      */
     public final native int getUtcOffset() /*-{
-        return this.utc_offset;
+        return this.utc_offset_minutes;
     }-*/;
 
     /**

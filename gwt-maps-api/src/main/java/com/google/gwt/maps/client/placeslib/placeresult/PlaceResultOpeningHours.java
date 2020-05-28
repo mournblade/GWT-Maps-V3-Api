@@ -22,6 +22,7 @@ package com.google.gwt.maps.client.placeslib.placeresult;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsDate;
 
 public class PlaceResultOpeningHours extends JavaScriptObject {
 
@@ -29,17 +30,24 @@ public class PlaceResultOpeningHours extends JavaScriptObject {
   }
 
   /**
-   * Is a boolean value indicating if the Place is open at the current time.
-   */
-  public final native boolean getOpenNow() /*-{
-    return this.open_now;
-  }-*/;
-
-  /**
    * Is an array of opening periods covering seven days, starting from Sunday, in chronological order.
    */
   public final native JsArray<PlaceResultPeriods> getPeriods() /*-{
     return this.periods;
+  }-*/;
+
+  /**
+   * Is a boolean value indicating if the Place is open at the current time.
+   */
+  public final native boolean getIsOpen() /*-{
+    return this.isOpen();
+  }-*/;
+
+  /**
+   * Is a boolean value indicating if the Place is open at the current time.
+   */
+  public final native boolean getIsOpenAtTime(JsDate time) /*-{
+    return this.isOpen(time);
   }-*/;
 
 }

@@ -84,7 +84,7 @@ public class Showcase implements EntryPoint {
       }
     };
 
-    LoadApi.go(onLoad, loadLibraries, sensor);
+    LoadApi.go(onLoad, loadLibraries, sensor, "key=AIzaSyB8JF7nkgdz1CMbvJhmPL8rCKEXwyx3blk");
   }
 
   /**
@@ -95,7 +95,10 @@ public class Showcase implements EntryPoint {
 
     RootPanel.get(mapsContainer).add(html);
 
-    drawHeatMap();
+    drawAutocomplete();
+    drawPlaceSearchRequestMap();
+
+    /*drawHeatMap();
 
     drawImageMapType();
 
@@ -143,7 +146,7 @@ public class Showcase implements EntryPoint {
 
     drawMultipleKmlMap();
 
-    drawOverlayViewMap();
+    drawOverlayViewMap();                    */
     
     // TODO put on its own page someday
     //drawLanguageMap();
