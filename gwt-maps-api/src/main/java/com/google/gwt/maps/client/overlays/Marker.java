@@ -174,7 +174,7 @@ public class Marker extends MVCObject<Marker> {
 
   private final native MapImpl getMapImpl() /*-{
     return this.getMap();
-  }-*/;;
+  }-*/;
 
   /**
    * get Map (if it is a pano)
@@ -242,6 +242,11 @@ public class Marker extends MVCObject<Marker> {
   public final native int getZindex() /*-{
     return this.getZIndex();
   }-*/;
+
+  public final native MarkerLabel getLabel() /*-{
+    return this.getLabel();
+  }-*/;
+
 
   /**
    * set Animation
@@ -414,6 +419,14 @@ public class Marker extends MVCObject<Marker> {
    */
   public final native void setTitle(String title) /*-{
     this.setTitle(title);
+  }-*/;
+
+  public final native void setLabel(MarkerLabel label) /*-{
+    this.setLabel(label);
+  }-*/;
+
+  public final native void setLabel(String label) /*-{
+    this.setLabel(label);
   }-*/;
 
   /**

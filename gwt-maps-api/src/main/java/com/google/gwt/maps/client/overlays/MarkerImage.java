@@ -140,6 +140,17 @@ public class MarkerImage extends JavaScriptObject {
     this.anchor = anchor;
   }-*/;
 
+  public final native void setLabelOrigin(Point labelOrigin) /*-{
+    this.labelOrigin = labelOrigin;
+  }-*/;
+
+  /**
+   * Gets The position of the symbol relative to the marker or polyline
+   */
+  public final native Point getLabelOrigin() /*-{
+    return this.labelOrigin;
+  }-*/;
+
   /**
    * gets The position at which to anchor an image in correspondance to the location of the marker on the map. By
    * default, the anchor is located along the center point of the bottom of the image.

@@ -310,7 +310,19 @@ public class MarkerGwtTest extends AbstractMapsGWTTestHelper {
         finishTest();
       }
     });
+  }
 
+  public void testMarkerLabel() {
+    asyncLibTest(() -> {
+      String labelText = "test";
+      MarkerOptions options = MarkerOptions.newInstance();
+      MarkerLabel left = MarkerLabel.newInstance(labelText);
+      options.setLabel(left);
+      Marker o = Marker.newInstance(options);
+      MarkerLabel right = o.getLabel();
+      assertEquals(left.getText(), right.getText());
+      finishTest();
+    });
   }
 
   public void testVisible() {

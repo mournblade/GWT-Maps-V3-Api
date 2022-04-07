@@ -13,3 +13,4 @@ lib**
 src_maps**
 **/bin**
 **/.gwt**
+/gwt-maps-api/war/

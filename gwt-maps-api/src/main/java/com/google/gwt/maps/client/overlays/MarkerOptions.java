@@ -176,6 +176,18 @@ public class MarkerOptions extends JavaScriptObject {
     return this.icon;
   }-*/;
 
+  public final native MarkerLabel getLabel() /*-{
+    return this.getLabel();
+  }-*/;
+
+  public final native void setLabel(MarkerLabel label) /*-{
+    this.setLabel(label);
+  }-*/;
+
+  public final native void setLabel(String label) /*-{
+    this.setLabel(label);
+  }-*/;
+
   /**
    * sets Map on which to display Polyline.
    * 
