@@ -101,20 +101,23 @@ public class CustomControlsMapWidget extends Composite {
     });
 
     FlowPanel widget = new FlowPanel();
+    widget.setWidth("500px");
     widget.add(button);
-    widget.add(new HTML("Custom Controls"));
+    widget.add(new HTML("Custom Controls!"));
     widget.add(button);
     widget.add(button2);
     widget.add(cb);
     widget.addStyleName("TestControls");
 
     // TODO I'm not able to get the stylesheet to work, but this works below
-    DOM.setStyleAttribute(widget.getElement(), "background", "white");
+    DOM.setStyleAttribute(widget.getElement(), "background", "#22ffffff");
     DOM.setStyleAttribute(widget.getElement(), "padding", "5px");
     DOM.setStyleAttribute(widget.getElement(), "margin", "3px");
+    DOM.setStyleAttribute(widget.getElement(), "opacity", "0.5");
     DOM.setStyleAttribute(widget.getElement(), "border", "3px solid #FF0000");
 
     mapWidget.setControls(ControlPosition.RIGHT_CENTER, widget);
+    mapWidget.setControls(ControlPosition.TOP_CENTER, widget);
   }
 
 }

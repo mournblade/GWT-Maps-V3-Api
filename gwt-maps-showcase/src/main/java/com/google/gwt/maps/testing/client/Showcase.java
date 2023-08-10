@@ -95,7 +95,7 @@ public class Showcase implements EntryPoint {
 
     RootPanel.get(mapsContainer).add(html);
 
-    drawHeatMap();
+    /*drawHeatMap();
 
     drawImageMapType();
 
@@ -115,7 +115,7 @@ public class Showcase implements EntryPoint {
 
     drawElevation();
 
-    drawAdvancedLayers();
+    drawAdvancedLayers();*/
 
     drawCustomControlsMap();
 

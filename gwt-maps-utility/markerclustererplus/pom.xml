@@ -5,13 +5,12 @@
     <parent>
         <groupId>com.nuba</groupId>
         <artifactId>gwt-maps-utility</artifactId>
-        <version>3.10.0-alpha-101-SNAPSHOT</version>
+        <version>3.41.0</version>
     </parent>
 
-    <version>3.10.0-alpha-101-SNAPSHOT</version>
     <artifactId>gwt-maps-utility-markerclustererplus</artifactId>
     <name>Marker Clusterer Plus</name>
-    
+    <version>3.41.0</version>
     <build>
         <resources>
             <resource>
