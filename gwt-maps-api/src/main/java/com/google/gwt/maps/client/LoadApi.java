@@ -52,7 +52,7 @@ public class LoadApi {
    * @param sensor - derive location [true|false]
    */
   public static void go(Runnable onLoad, boolean sensor) {
-    load(onLoad, sensor, null, null, null);
+    load(onLoad, sensor, null, null, null, null);
   }
 
   /**
@@ -63,7 +63,7 @@ public class LoadApi {
    * @param sensor derive location [true|false]
    */
   public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, boolean sensor) {
-    load(onLoad, sensor, loadLibraries, null, null);
+    load(onLoad, sensor, loadLibraries, null, null, null);
   }
 
   /**
@@ -75,7 +75,7 @@ public class LoadApi {
    * @param language choose a language
    */
   public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, boolean sensor, Language language) {
-    load(onLoad, sensor, loadLibraries, language, null);
+    load(onLoad, sensor, loadLibraries, language, null, null);
   }
 
     /**
@@ -87,7 +87,7 @@ public class LoadApi {
    */
   public static void go(Runnable onLoad, LoadLibrary[] loadLibraries, boolean sensor) {
     ArrayList<LoadLibrary> loadLibrariesList = new ArrayList<LoadLibrary>(Arrays.asList(loadLibraries));
-    load(onLoad, sensor, loadLibrariesList, null, null);
+    load(onLoad, sensor, loadLibrariesList, null, null, null);
   }
 
   /**
@@ -100,7 +100,7 @@ public class LoadApi {
    */
   public static void go(Runnable onLoad, LoadLibrary[] loadLibraries, boolean sensor, Language language) {
     ArrayList<LoadLibrary> loadLibrariesList = new ArrayList<LoadLibrary>(Arrays.asList(loadLibraries));
-    load(onLoad, sensor, loadLibrariesList, language, null);
+    load(onLoad, sensor, loadLibrariesList, language, null, null);
   }
 
     /**
@@ -111,7 +111,7 @@ public class LoadApi {
    * @param otherParams add additional params. like "key=YOUR_API_KEY"
    */
   public static void go(Runnable onLoad, boolean sensor, String otherParams) {
-    load(onLoad, sensor, null, null, otherParams);
+    load(onLoad, sensor, null, null, null, otherParams);
   }
 
   /**
@@ -122,9 +122,21 @@ public class LoadApi {
    * @param sensor sensor derive location [true|false]
    * @param otherParams add additional params. like "key=YOUR_API_KEY"
    */
-  public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, boolean sensor, String otherParams) {
-    load(onLoad, sensor, loadLibraries, null, otherParams);
+  public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, boolean sensor, String callbackMethod, String otherParams) {
+    load(onLoad, sensor, loadLibraries, null, callbackMethod, otherParams);
   }
+
+    /**
+     * loads maps api
+     *
+     * @param onLoad callback on success
+     * @param loadLibraries load additional libraries like geometry
+     * @param sensor sensor derive location [true|false]
+     * @param otherParams add additional params. like "key=YOUR_API_KEY"
+     */
+    public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, boolean sensor, String otherParams) {
+        load(onLoad, sensor, loadLibraries, null, null, otherParams);
+    }
 
   /**
    * loads maps api
@@ -137,10 +149,10 @@ public class LoadApi {
    */
   public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, boolean sensor, Language language,
       String otherParams) {
-    load(onLoad, sensor, loadLibraries, language, otherParams);
+    load(onLoad, sensor, loadLibraries, language, null, otherParams);
   }
 
-  private static void load(Runnable onLoad, boolean sensor, ArrayList<LoadLibrary> loadLibraries, Language language,
+  private static void load(Runnable onLoad, boolean sensor, ArrayList<LoadLibrary> loadLibraries, Language language, String callbackMethod,
       String otherParams) {
     //String op = "sensor=" + sensor;
     String op = "";
@@ -155,6 +167,8 @@ public class LoadApi {
     if (language != null) {
       op += "&language=" + language.getValue();
     }
+
+      op += "&callback=" + (callbackMethod != null ? callbackMethod : "Function.prototype");
 
     AjaxLoaderOptions settings = AjaxLoaderOptions.newInstance();
     settings.setOtherParms(op);
@@ -326,6 +340,5 @@ public class LoadApi {
         public String toString() {
             return name().toLowerCase() + "(" + value + ")";
         }
-
     }
 }
