@@ -38,7 +38,6 @@ public abstract class AbstractMapsGWTTestHelper extends GWTTestCase {
   private final String MODULE_NAME = "com.google.gwt.maps.MapsForTests";
   private int asyncDelayMs = 30000;
   private final double equalsEpsilon = 1e-3;
-  private boolean sensor = false;
 
   /**
    * Runs the test with libraries defined by the {@link #getLibraries()} override loaded and fails if not complete by
@@ -74,7 +73,7 @@ public abstract class AbstractMapsGWTTestHelper extends GWTTestCase {
    * Runs the test with the given libraries loaded and fails if not complete by {@link #getAsyncDelayMs()}.<br>
    * <br>
    * <b>NOTE:</b> You must call {@link #finishTest()} or test will fail.
-   * 
+   *
    * @param test code to run
    * @param otherParams any additional parameters, for example apikey
    * @param libs libraries to have loaded
@@ -85,7 +84,7 @@ public abstract class AbstractMapsGWTTestHelper extends GWTTestCase {
     loadLibraries.addAll(Arrays.asList(libs));
 
     // run
-    LoadApi.go(test, loadLibraries, isSensor(), otherParams);
+    LoadApi.go(test, loadLibraries, otherParams);
 
     // ensure expiration is does not reach finishTest()
     delayTest();
@@ -116,21 +115,8 @@ public abstract class AbstractMapsGWTTestHelper extends GWTTestCase {
     return MODULE_NAME;
   }
 
-  /**
-   * Is the test with run as with a device sensor
-   * 
-   * @return
-   */
-  public final boolean isSensor() {
-    return sensor;
-  }
-
   public final void setAsyncDelayMs(int asyncDelayMs) {
     this.asyncDelayMs = asyncDelayMs;
-  }
-
-  public final void setSensor(boolean sensor) {
-    this.sensor = sensor;
   }
 
   public final double getEqualsEpsilon() {

@@ -65,7 +65,6 @@ public class Showcase implements EntryPoint {
   }
 
   private void loadMapApi() {
-    boolean sensor = true;
 
     // load all the libs for use in the maps
     ArrayList<LoadLibrary> loadLibraries = new ArrayList<LoadApi.LoadLibrary>();
@@ -84,7 +83,7 @@ public class Showcase implements EntryPoint {
       }
     };
 
-    LoadApi.go(onLoad, loadLibraries, sensor);
+    LoadApi.go(onLoad, loadLibraries);
   }
 
   /**
@@ -117,7 +116,9 @@ public class Showcase implements EntryPoint {
 
     drawAdvancedLayers();*/
 
-    drawCustomControlsMap();
+    drawAutocomplete();
+
+    /*drawCustomControlsMap();
 
     drawInfoWindowMap();
 
@@ -127,7 +128,7 @@ public class Showcase implements EntryPoint {
 
     drawStreetView();
 
-    drawAutocomplete();
+
 
     drawBasicMap();
 
@@ -146,7 +147,7 @@ public class Showcase implements EntryPoint {
     drawOverlayViewMap();
     
     // TODO put on its own page someday
-    //drawLanguageMap();
+    //drawLanguageMap();     */
   }
 
   /**

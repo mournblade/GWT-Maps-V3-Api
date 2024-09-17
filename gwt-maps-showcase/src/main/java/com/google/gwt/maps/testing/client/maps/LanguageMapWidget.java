@@ -58,7 +58,7 @@ public class LanguageMapWidget extends Composite {
         drawMap();
       }
     };
-    LoadApi.go(onload, LoadApi.LoadLibrary.values(), false, Language.CHINESE_SIMPLIFIED);
+    LoadApi.go(onload, LoadApi.LoadLibrary.values(), Language.CHINESE_SIMPLIFIED);
   }
 
   private void drawMap() {

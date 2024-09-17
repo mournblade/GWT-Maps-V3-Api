@@ -40,7 +40,6 @@ public class ShowcaseFullPage implements EntryPoint {
   }
  
   private void loadMapApi() {
-    boolean sensor = true;
     
     // load all the libs for use
     ArrayList<LoadLibrary> loadLibraries = new ArrayList<LoadApi.LoadLibrary>();
@@ -56,7 +55,7 @@ public class ShowcaseFullPage implements EntryPoint {
       }
     };
     
-    LoadApi.go(onLoad, loadLibraries, sensor);
+    LoadApi.go(onLoad, loadLibraries);
   }
 
   

@@ -46,7 +46,7 @@ public class LoadApiGwtTest extends AbstractMapsGWTTestHelper {
       public void run() {
         finishTest();
       }
-    }, loadLibraries, sensor);
+    }, loadLibraries);
     delayTest();
   }
 
@@ -57,7 +57,7 @@ public class LoadApiGwtTest extends AbstractMapsGWTTestHelper {
       public void run() {
         finishTest();
       }
-    }, sensor);
+    });
     delayTest();
   }
 
@@ -67,7 +67,7 @@ public class LoadApiGwtTest extends AbstractMapsGWTTestHelper {
       public void run() {
         finishTest();
       }
-    }, true);
+    });
     delayTest();
   }
 
@@ -80,7 +80,7 @@ public class LoadApiGwtTest extends AbstractMapsGWTTestHelper {
       public void run() {
         finishTest();
       }
-    }, loadLibraries, sensor);
+    }, loadLibraries);
     delayTest();
   }
 
@@ -93,9 +93,9 @@ public class LoadApiGwtTest extends AbstractMapsGWTTestHelper {
           public void run() {
             finishTest();
           }
-        }, false);
+        });
       }
-    }, false);
+    });
     delayTest();
   }
 
@@ -108,9 +108,9 @@ public class LoadApiGwtTest extends AbstractMapsGWTTestHelper {
           public void run() {
             finishTest();
           }
-        }, false);
+        });
       }
-    }, true);
+    });
     delayTest();
   }
 
@@ -123,25 +123,10 @@ public class LoadApiGwtTest extends AbstractMapsGWTTestHelper {
           public void run() {
             finishTest();
           }
-        }, false, null);
+        });
       }
-    }, true);
+    });
 
-  }
-
-  public void testReload6() {
-    LoadApi.go(new Runnable() {
-      @Override
-      public void run() {
-        LoadApi.go(new Runnable() {
-          @Override
-          public void run() {
-            finishTest();
-          }
-        }, false, "");
-      }
-    }, true);
-    delayTest();
   }
 
   public void testUse1() {
@@ -154,7 +139,7 @@ public class LoadApiGwtTest extends AbstractMapsGWTTestHelper {
       public void run() {
         finishTest();
       }
-    }, loadLibraries, sensor);
+    }, loadLibraries);
     delayTest();
   }
 
