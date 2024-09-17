@@ -9,9 +9,9 @@ package com.google.gwt.maps.client;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -68,6 +68,18 @@ public class LoadApi {
   public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries) {
     load(onLoad, loadLibraries, null, null, null, null);
   }
+
+    /**
+     * loads maps api
+     *
+     * @param onLoad callback on success
+     * @param loadLibraries load additional libraries like geometry*
+     * @param language choose a language
+     * @param otherParams add additional params. like "key=YOUR_API_KEY"
+     */
+    public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, Language language, String otherParams) {
+        load(onLoad, loadLibraries, language, null, otherParams, null);
+    }
 
     /**
      * loads maps api
