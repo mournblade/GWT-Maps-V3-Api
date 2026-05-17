@@ -26,6 +26,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.maps.client.LoadApi;
 import com.google.gwt.maps.client.LoadApi.LoadLibrary;
 import com.google.gwt.maps.testing.client.maps.AdvancedLayersWidget;
+import com.google.gwt.maps.testing.client.maps.AdvancedMarkerMapWidget;
 import com.google.gwt.maps.testing.client.maps.AutocompletePlacesMapWidget;
 import com.google.gwt.maps.testing.client.maps.BasicMapWidget;
 import com.google.gwt.maps.testing.client.maps.ControlsMapWidget;
@@ -42,7 +43,6 @@ import com.google.gwt.maps.testing.client.maps.LanguageMapWidget;
 import com.google.gwt.maps.testing.client.maps.MultipleKmlMapWidget;
 import com.google.gwt.maps.testing.client.maps.OpenStreetMapLayerWidget;
 import com.google.gwt.maps.testing.client.maps.OverlayViewMapWidget;
-import com.google.gwt.maps.testing.client.maps.PanoramioMapWidget;
 import com.google.gwt.maps.testing.client.maps.PlaceSearchMapWidget;
 import com.google.gwt.maps.testing.client.maps.PolylineMapWidget;
 import com.google.gwt.maps.testing.client.maps.StreetViewCustomMapWidget;
@@ -50,7 +50,6 @@ import com.google.gwt.maps.testing.client.maps.StreetViewMapWidget;
 import com.google.gwt.maps.testing.client.maps.StreetViewSideBySideMapWidget;
 import com.google.gwt.maps.testing.client.maps.StyledMapWidget;
 import com.google.gwt.maps.testing.client.maps.TransitDirectionsServiceMapWidget;
-import com.google.gwt.maps.testing.client.maps.WeatherLayersWidget;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -68,13 +67,11 @@ public class Showcase implements EntryPoint {
 
     // load all the libs for use in the maps
     ArrayList<LoadLibrary> loadLibraries = new ArrayList<LoadApi.LoadLibrary>();
-    loadLibraries.add(LoadLibrary.ADSENSE);
     loadLibraries.add(LoadLibrary.DRAWING);
     loadLibraries.add(LoadLibrary.GEOMETRY);
-    loadLibraries.add(LoadLibrary.PANORAMIO);
     loadLibraries.add(LoadLibrary.PLACES);
-    loadLibraries.add(LoadLibrary.WEATHER);
     loadLibraries.add(LoadLibrary.VISUALIZATION);
+    loadLibraries.add(LoadLibrary.MARKER);
 
     Runnable onLoad = new Runnable() {
       @Override
@@ -83,7 +80,10 @@ public class Showcase implements EntryPoint {
       }
     };
 
-    LoadApi.go(onLoad, loadLibraries);
+    String key = com.google.gwt.user.client.Window.Location.getParameter("key");
+    String otherParams = (key != null && !key.isEmpty()) ? "key=" + key : null;
+
+    LoadApi.go(onLoad, loadLibraries, null, otherParams);
   }
 
   /**
@@ -98,8 +98,6 @@ public class Showcase implements EntryPoint {
 
     drawImageMapType();
 
-    drawWeatherMap();
-
     drawStyledMap();
 
     drawDrawingMap();
@@ -112,11 +110,14 @@ public class Showcase implements EntryPoint {
 
     drawTransitDirections();
 
-    drawElevation();
+    /*drawElevation();
 
     drawAdvancedLayers();*/
 
+    drawAdvancedMarkers();
+
     drawAutocomplete();
+
 
     /*drawCustomControlsMap();
 
@@ -137,8 +138,6 @@ public class Showcase implements EntryPoint {
     drawKmlMap();
 
     drawMapWcontrols();
-
-    drawPanoramioMap();
 
     drawPlaceSearchRequestMap();
 
@@ -169,11 +168,6 @@ public class Showcase implements EntryPoint {
     addMapWidget(wMap);
   }
 
-  private void drawWeatherMap() {
-    WeatherLayersWidget wMap = new WeatherLayersWidget();
-    addMapWidget(wMap);
-  }
-
   private void drawStyledMap() {
     StyledMapWidget wMap = new StyledMapWidget();
     addMapWidget(wMap);
@@ -186,6 +180,11 @@ public class Showcase implements EntryPoint {
 
   private void drawAdvancedLayers() {
     AdvancedLayersWidget wMap = new AdvancedLayersWidget();
+    addMapWidget(wMap);
+  }
+
+  private void drawAdvancedMarkers() {
+    AdvancedMarkerMapWidget wMap = new AdvancedMarkerMapWidget();
     addMapWidget(wMap);
   }
 
@@ -251,11 +250,6 @@ public class Showcase implements EntryPoint {
 
   private void drawMapWcontrols() {
     ControlsMapWidget wMap = new ControlsMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawPanoramioMap() {
-    PanoramioMapWidget wMap = new PanoramioMapWidget();
     addMapWidget(wMap);
   }
 

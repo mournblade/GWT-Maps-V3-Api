@@ -29,7 +29,7 @@ public class SandboxGwtTest extends AbstractMapsGWTTestHelper {
 
   @Override
   public LoadLibrary[] getLibraries() {
-    return new LoadLibrary[] { LoadLibrary.GEOMETRY, LoadLibrary.PANORAMIO, LoadLibrary.PLACES, LoadLibrary.WEATHER };
+    return new LoadLibrary[] { LoadLibrary.GEOMETRY, LoadLibrary.PLACES };
   }
 
   protected void runSomething() {

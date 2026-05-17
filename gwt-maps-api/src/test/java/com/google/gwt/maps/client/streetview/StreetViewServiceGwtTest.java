@@ -34,8 +34,7 @@ public class StreetViewServiceGwtTest extends AbstractMapsGWTTestHelper {
 
   @Override
   public LoadLibrary[] getLibraries() {
-    return new LoadLibrary[] { LoadLibrary.ADSENSE, LoadLibrary.DRAWING, LoadLibrary.GEOMETRY, LoadLibrary.PANORAMIO,
-        LoadLibrary.PLACES };
+    return new LoadLibrary[] { LoadLibrary.DRAWING, LoadLibrary.GEOMETRY, LoadLibrary.PLACES };
   }
 
   @SuppressWarnings("unused")

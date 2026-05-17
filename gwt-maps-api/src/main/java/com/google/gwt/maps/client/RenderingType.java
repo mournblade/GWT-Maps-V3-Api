@@ -1,4 +1,4 @@
-package com.google.gwt.maps.client.weatherlib;
+package com.google.gwt.maps.client;
 
 /*
  * #%L
@@ -21,29 +21,33 @@ package com.google.gwt.maps.client.weatherlib;
  */
 
 /**
- * The color of the labels displayed on the weather layer. <br>
+ * Rendering types for the map.
  * <br>
- * See <a href= "https://developers.google.com/maps/documentation/javascript/reference#LabelColor" >LabelColor API
- * Doc</a>
+ * See <a href="https://developers.google.com/maps/documentation/javascript/reference/map#RenderingType">RenderingType API Doc</a>
  */
-public enum LabelColor {
+public enum RenderingType {
 
   /**
-   * Weather labels will be displayed as black text with a white border.
+   * Vector map.
    */
-  BLACK,
+  VECTOR,
 
   /**
-   * Weather labels will be displayed as white text with a black border.
+   * Raster map.
    */
-  WHITE;
+  RASTER,
+
+  /**
+   * Uninitialized rendering type.
+   */
+  UNINITIALIZED;
 
   public String value() {
-    return name().toLowerCase();
+    return name();
   }
 
-  public static LabelColor fromValue(String type) {
-    return valueOf(type.toUpperCase());
+  public static RenderingType fromValue(String value) {
+    return valueOf(value.toUpperCase());
   }
 
   @Override

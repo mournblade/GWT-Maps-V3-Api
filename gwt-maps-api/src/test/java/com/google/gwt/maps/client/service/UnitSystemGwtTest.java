@@ -28,7 +28,7 @@ public class UnitSystemGwtTest extends AbstractMapsGWTTestHelper {
 
   @Override
   public LoadLibrary[] getLibraries() {
-    return new LoadLibrary[] { LoadLibrary.ADSENSE };
+    return new LoadLibrary[0];
   }
 
   public void testReverseEngineer() {

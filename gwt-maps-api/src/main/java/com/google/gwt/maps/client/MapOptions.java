@@ -768,4 +768,44 @@ public class MapOptions extends JavaScriptObject {
     return this.clickableIcons;
   }-*/;
 
+  /**
+   * Sets the Map ID for the map. This is required for advanced features like Advanced Markers.
+   * 
+   * @param mapId
+   */
+  public final native void setMapId(String mapId) /*-{
+    this.mapId = mapId;
+  }-*/;
+
+  /**
+   * Gets the Map ID for the map.
+   */
+  public final native String getMapId() /*-{
+    return this.mapId;
+  }-*/;
+
+  /**
+   * Sets the rendering type for the map.
+   * 
+   * @param renderingType
+   */
+  public final void setRenderingType(RenderingType renderingType) {
+    setRenderingTypeImpl(renderingType.value());
+  }
+
+  private final native void setRenderingTypeImpl(String renderingType) /*-{
+    this.renderingType = renderingType;
+  }-*/;
+
+  /**
+   * Gets the rendering type for the map.
+   */
+  public final RenderingType getRenderingType() {
+    return RenderingType.fromValue(getRenderingTypeImpl());
+  }
+
+  private final native String getRenderingTypeImpl() /*-{
+    return this.renderingType || "UNINITIALIZED";
+  }-*/;
+
 }

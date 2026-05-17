@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.nuba</groupId>
         <artifactId>gwt-maps</artifactId>
-        <version>3.41.0</version>
+        <version>4.0.0</version>
     </parent>
 
     <artifactId>gwt-maps-showcase</artifactId>
@@ -61,7 +61,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <version>${gwt.version}</version>
+                <version>${gwt.maven.version}</version>
                 <configuration>
                     <strict>true</strict>
 
@@ -90,8 +90,13 @@
                 </executions>
                 <dependencies>
                     <dependency>
-                        <groupId>com.google.gwt</groupId>
+                        <groupId>org.gwtproject</groupId>
                         <artifactId>gwt-user</artifactId>
+                        <version>${gwt.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.gwtproject</groupId>
+                        <artifactId>gwt-dev</artifactId>
                         <version>${gwt.version}</version>
                     </dependency>
                 </dependencies>
@@ -227,12 +232,12 @@
 
         <!-- GWT -->
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-user</artifactId>
             <version>${gwt.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-dev</artifactId>
             <version>${gwt.version}</version>
             <scope>provided</scope>

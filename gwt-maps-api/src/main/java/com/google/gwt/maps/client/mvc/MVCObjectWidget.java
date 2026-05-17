@@ -40,7 +40,7 @@ public abstract class MVCObjectWidget<T extends JavaScriptObject> extends Widget
   }
 
   /**
-   * Convenience method to get the JSO/MVC object (MapWidget, StreetViewPanoRamaWidget, AdUnitWidget, ...?)
+   * Convenience method to get the JSO/MVC object (MapWidget, StreetViewPanoRamaWidget, ...?)
    */
   public T getMVCObject() {
     return impl;

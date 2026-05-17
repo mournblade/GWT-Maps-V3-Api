@@ -21,7 +21,6 @@ package com.google.gwt.maps.testing.client.maps;
  */
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
@@ -31,17 +30,14 @@ import com.google.gwt.maps.client.events.bounds.BoundsChangeMapEvent;
 import com.google.gwt.maps.client.events.bounds.BoundsChangeMapHandler;
 import com.google.gwt.maps.client.events.click.ClickMapEvent;
 import com.google.gwt.maps.client.events.click.ClickMapHandler;
-import com.google.gwt.maps.client.events.place.PlaceChangeMapEvent;
-import com.google.gwt.maps.client.events.place.PlaceChangeMapHandler;
-import com.google.gwt.maps.client.placeslib.Autocomplete;
-import com.google.gwt.maps.client.placeslib.AutocompleteOptions;
+import com.google.gwt.maps.client.placeslib.Place;
+import com.google.gwt.maps.client.placeslib.PlaceAutocompleteElement;
+import com.google.gwt.maps.client.placeslib.PlaceFetchFieldsHandler;
+import com.google.gwt.maps.client.placeslib.PlaceSelectHandler;
 import com.google.gwt.maps.client.placeslib.AutocompleteType;
-import com.google.gwt.maps.client.placeslib.PlaceGeometry;
-import com.google.gwt.maps.client.placeslib.PlaceResult;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
@@ -58,7 +54,7 @@ public class AutocompletePlacesMapWidget extends Composite {
 
   private MapWidget mapWidget;
 
-  private TextBox tbPlaces;
+  private PlaceAutocompleteElement placeAutocomplete;
 
   public AutocompletePlacesMapWidget() {
     pWidget = new VerticalPanel();
@@ -72,16 +68,17 @@ public class AutocompletePlacesMapWidget extends Composite {
     pWidget.clear();
 
     HTML html = new HTML("<br><br>Map with autocomplete places &nbsp;&nbsp;");
-    tbPlaces = new TextBox();
-    tbPlaces.setWidth("350px");
+    placeAutocomplete = new PlaceAutocompleteElement();
+    placeAutocomplete.setWidth("350px");
+    placeAutocomplete.setPlaceholder("Search places");
 
     HorizontalPanel hp = new HorizontalPanel();
     hp.add(html);
-    hp.add(tbPlaces);
+    hp.add(placeAutocomplete);
 
     pWidget.add(hp);
 
-    hp.setCellVerticalAlignment(tbPlaces, HorizontalPanel.ALIGN_BOTTOM);
+    hp.setCellVerticalAlignment(placeAutocomplete, HorizontalPanel.ALIGN_BOTTOM);
 
     drawMap();
 
@@ -109,37 +106,41 @@ public class AutocompletePlacesMapWidget extends Composite {
 
   private void drawAutoComplete() {
 
-    Element element = tbPlaces.getElement();
-
     AutocompleteType[] types = new AutocompleteType[2];
     types[0] = AutocompleteType.ESTABLISHMENT;
     types[1] = AutocompleteType.GEOCODE;
 
-    AutocompleteOptions options = AutocompleteOptions.newInstance();
-    options.setTypes(types);
-    options.setBounds(mapWidget.getBounds());
+    // placeAutocomplete.setTypes(types);
+    placeAutocomplete.setRequestedFields("location");
+    placeAutocomplete.setLocationBias(mapWidget.getBounds());
 
-    final Autocomplete autoComplete = Autocomplete.newInstance(element, options);
+    placeAutocomplete.addPlaceSelectHandler(new PlaceSelectHandler() {
+      public void onPlaceSelect(final Place place) {
+        if (place == null) {
+          return;
+        }
+        place.fetchFields(new PlaceFetchFieldsHandler() {
+          public void onSuccess(Place fetchedPlace) {
+            LatLng center = fetchedPlace.getLocation();
+            if (center == null) {
+              return;
+            }
+            mapWidget.panTo(center);
+            // mapWidget.setZoom(8);
+            GWT.log("place changed center=" + center);
+          }
 
-    autoComplete.addPlaceChangeHandler(new PlaceChangeMapHandler() {
-      public void onEvent(PlaceChangeMapEvent event) {
-
-        PlaceResult result = autoComplete.getPlace();
-
-        PlaceGeometry geomtry = result.getGeometry();
-        LatLng center = geomtry.getLocation();
-
-        mapWidget.panTo(center);
-        // mapWidget.setZoom(8);
-
-        GWT.log("place changed center=" + center);
+          public void onFailure(String message) {
+            GWT.log("place fetch failed: " + message);
+          }
+        }, "location");
       }
     });
 
     mapWidget.addBoundsChangeHandler(new BoundsChangeMapHandler() {
       public void onEvent(BoundsChangeMapEvent event) {
         LatLngBounds bounds = mapWidget.getBounds();
-        autoComplete.setBounds(bounds);
+        placeAutocomplete.setLocationBias(bounds);
       }
     });
   }

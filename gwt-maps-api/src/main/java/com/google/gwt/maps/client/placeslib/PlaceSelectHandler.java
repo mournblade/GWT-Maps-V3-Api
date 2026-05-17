@@ -1,4 +1,4 @@
-package com.google.gwt.maps.client.events.weatherlibmouse;
+package com.google.gwt.maps.client.placeslib;
 
 /*
  * #%L
@@ -20,14 +20,7 @@ package com.google.gwt.maps.client.events.weatherlibmouse;
  * #L%
  */
 
-import com.google.gwt.ajaxloader.client.Properties;
-import com.google.gwt.maps.client.events.MapEventFormatter;
+public interface PlaceSelectHandler {
 
-public class WeatherMouseEventFormatter implements MapEventFormatter<WeatherMouseMapEvent> {
-
-  @Override
-  public WeatherMouseMapEvent createEvent(Properties properties) {
-    return new WeatherMouseMapEvent(properties);
-  }
-
+  public void onPlaceSelect(Place place);
 }

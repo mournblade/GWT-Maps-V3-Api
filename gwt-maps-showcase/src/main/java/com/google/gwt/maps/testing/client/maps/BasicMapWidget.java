@@ -26,22 +26,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.MapOptions;
 import com.google.gwt.maps.client.MapTypeId;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.adsense.AdFormat;
-import com.google.gwt.maps.client.adsense.AdUnitOptions;
-import com.google.gwt.maps.client.adsense.AdUnitWidget;
 import com.google.gwt.maps.client.base.LatLng;
-import com.google.gwt.maps.client.controls.ControlPosition;
 import com.google.gwt.maps.client.events.MouseEvent;
-import com.google.gwt.maps.client.events.channelnumber.ChannelNumberChangeMapEvent;
-import com.google.gwt.maps.client.events.channelnumber.ChannelNumberChangeMapHandler;
 import com.google.gwt.maps.client.events.click.ClickMapEvent;
 import com.google.gwt.maps.client.events.click.ClickMapHandler;
-import com.google.gwt.maps.client.events.format.FormatChangeMapEvent;
-import com.google.gwt.maps.client.events.format.FormatChangeMapHandler;
-import com.google.gwt.maps.client.events.mapchange.MapChangeMapEvent;
-import com.google.gwt.maps.client.events.mapchange.MapChangeMapHandler;
-import com.google.gwt.maps.client.events.position.PositionChangeMapEvent;
-import com.google.gwt.maps.client.events.position.PositionChangeMapHandler;
 import com.google.gwt.maps.client.overlays.Animation;
 import com.google.gwt.maps.client.overlays.InfoWindow;
 import com.google.gwt.maps.client.overlays.InfoWindowOptions;
@@ -122,7 +110,7 @@ public class BasicMapWidget extends Composite {
     
     // basic controls to test markers
     HorizontalPanel hp = new HorizontalPanel();
-    hp.add(new HTML("<br>Basic Map Example. With an AdUnit"));
+    hp.add(new HTML("<br>Basic Map Example"));
     hp.add(addBounceMarkerButton);
     hp.add(new HTML("&nbsp;"));
     hp.add(addDropMarkerButton);
@@ -139,7 +127,6 @@ public class BasicMapWidget extends Composite {
     pWidget.add(hp);
 
     drawMap();
-    drawMapAds();
     drawBasicMarker();
   }
 
@@ -211,41 +198,6 @@ public class BasicMapWidget extends Composite {
       public void onEvent(ClickMapEvent event) {
         // TODO fix the event getting, getting ....
         GWT.log("clicked on latlng=" + event.getMouseEvent().getLatLng());
-      }
-    });
-  }
-
-  private void drawMapAds() {
-    AdUnitOptions options = AdUnitOptions.newInstance();
-    options.setFormat(AdFormat.HALF_BANNER);
-    options.setPosition(ControlPosition.RIGHT_CENTER);
-    options.setMap(mapWidget);
-    options.setPublisherId("pub-0032065764310410");
-    options.setChannelNumber("4000893900");
-
-    AdUnitWidget adUnit = new AdUnitWidget(options);
-
-    adUnit.addChannelNumberChangeHandler(new ChannelNumberChangeMapHandler() {
-      @Override
-      public void onEvent(ChannelNumberChangeMapEvent event) {
-      }
-    });
-
-    adUnit.addFormatChangeHandler(new FormatChangeMapHandler() {
-      @Override
-      public void onEvent(FormatChangeMapEvent event) {
-      }
-    });
-
-    adUnit.addMapChangeHandler(new MapChangeMapHandler() {
-      @Override
-      public void onEvent(MapChangeMapEvent event) {
-      }
-    });
-
-    adUnit.addPositionChangeHandler(new PositionChangeMapHandler() {
-      @Override
-      public void onEvent(PositionChangeMapEvent event) {
       }
     });
   }

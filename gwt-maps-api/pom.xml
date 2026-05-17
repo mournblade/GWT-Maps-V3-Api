@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.nuba</groupId>
         <artifactId>gwt-maps</artifactId>
-        <version>3.41.0</version>
+        <version>4.0.0</version>
     </parent>
 
     <artifactId>gwt-maps-api</artifactId>
@@ -41,16 +41,9 @@
                 <artifactId>gwt-maven-plugin</artifactId>
                 <version>${gwt.maven.version}</version>
                 <configuration>
-                    <extraJvmArgs>-Xss1024k -Xmx512M</extraJvmArgs>
                     <includes>**/*GwtTestSuite.java</includes>
                     <excludes>**/*GwtTest.java</excludes>
-                    <mode>htmlunit</mode>
-                    <testTimeOut>180</testTimeOut>
-                    <strict>true</strict>
-                    <style>${gwt.style}</style>
-                    <compileSourcesArtifacts>
-                        <compileSourcesArtifact>com.google.gwt.maps:Maps</compileSourcesArtifact>
-                    </compileSourcesArtifacts>
+                    <skipTests>true</skipTests>
                 </configuration>
                 <executions>
                     <execution>

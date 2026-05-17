@@ -1,4 +1,4 @@
-package com.google.gwt.maps.client.events.panoramiomouse;
+package com.google.gwt.maps.client.placeslib;
 
 /*
  * #%L
@@ -20,7 +20,9 @@ package com.google.gwt.maps.client.events.panoramiomouse;
  * #L%
  */
 
-import com.google.gwt.maps.client.events.MapHandler;
+public interface PlaceFetchFieldsHandler {
 
-public interface PanoramioMouseMapHandler extends MapHandler<PanoramioMouseMapEvent> {
+  public void onSuccess(Place place);
+
+  public void onFailure(String message);
 }

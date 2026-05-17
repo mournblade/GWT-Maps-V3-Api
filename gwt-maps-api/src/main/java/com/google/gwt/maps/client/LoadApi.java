@@ -19,8 +19,9 @@ package com.google.gwt.maps.client;
  * limitations under the License.
  * #L%
  */
-import com.google.gwt.ajaxloader.client.AjaxLoader;
-import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.ScriptElement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,15 +29,13 @@ import java.util.Iterator;
 
 /**
  * Load Maps javascript v3 api
- *
- * TODO maybe move to the new loading system they have in google apis
  */
 public class LoadApi {
 
   /**
-   * Note: If you use 3, it will take the newest stable available. Don't want that. We didn't test with that yet!
+   * Use the stable quarterly channel.
    */
-  public final static String API_VERSION = "3.41";
+  public final static String API_VERSION = "quarterly";
 
   /**
    * private constructor
@@ -44,19 +43,13 @@ public class LoadApi {
   private LoadApi() {
   }
 
-    /**
-     * LoadApi.go(runnable, loadLibraries, true, language, "key="+key);
-     *         }else{
-     *             LoadApi.go(runnable, loadLibraries, true, language);
-     */
-
   /**
    * Load Maps javascript v3 api with default libraries. these are not loaded {@link LoadLibrary}
    *
    * @param onLoad - callback on success
    */
   public static void go(Runnable onLoad) {
-    load(onLoad,  null, null, null, null, null);
+    load(onLoad, null, null, null, null, null);
   }
 
   /**
@@ -69,30 +62,31 @@ public class LoadApi {
     load(onLoad, loadLibraries, null, null, null, null);
   }
 
-    /**
-     * loads maps api
-     *
-     * @param onLoad callback on success
-     * @param loadLibraries load additional libraries like geometry*
-     * @param language choose a language
-     * @param otherParams add additional params. like "key=YOUR_API_KEY"
-     */
-    public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, Language language, String otherParams) {
-        load(onLoad, loadLibraries, language, null, otherParams, null);
-    }
+  /**
+   * loads maps api
+   *
+   * @param onLoad callback on success
+   * @param loadLibraries load additional libraries like geometry*
+   * @param language choose a language
+   * @param otherParams add additional params. like "key=YOUR_API_KEY"
+   */
+  public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, Language language, String otherParams) {
+    load(onLoad, loadLibraries, language, null, otherParams, null);
+  }
 
-    /**
-     * loads maps api
-     *
-     * @param onLoad callback on success
-     * @param loadLibraries load additional libraries like geometry*
-     * @param language choose a language
-     * @param otherParams add additional params. like "key=YOUR_API_KEY"
-     * @param version version to use, like "beta"
-     */
-    public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, Language language, String otherParams, String version) {
-        load(onLoad, loadLibraries, language, null, otherParams, version);
-    }
+  /**
+   * loads maps api
+   *
+   * @param onLoad callback on success
+   * @param loadLibraries load additional libraries like geometry*
+   * @param language choose a language
+   * @param otherParams add additional params. like "key=YOUR_API_KEY"
+   * @param version version to use, like "beta"
+   */
+  public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, Language language, String otherParams,
+      String version) {
+    load(onLoad, loadLibraries, language, null, otherParams, version);
+  }
 
   /**
    * loads maps api
@@ -106,37 +100,64 @@ public class LoadApi {
     load(onLoad, loadLibrariesList, language, null, null, null);
   }
 
-    /**
-     * loads maps api
-     *
-     * @param onLoad callback on success
-     * @param loadLibraries load additional libraries like geometry
-     * @param otherParams add additional params. like "key=YOUR_API_KEY"
-     */
-    public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, String otherParams) {
-        load(onLoad, loadLibraries, null, null, otherParams, null);
-    }
-    
-  private static void load(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, Language language, String callbackMethod,
-      String otherParams, String version) {
-    String op = version != null ? "&v=" + version : "";
-    if (otherParams != null) {
-      op += "&" + otherParams;
+  /**
+   * loads maps api
+   *
+   * @param onLoad callback on success
+   * @param loadLibraries load additional libraries like geometry
+   * @param otherParams add additional params. like "key=YOUR_API_KEY"
+   */
+  public static void go(Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, String otherParams) {
+    load(onLoad, loadLibraries, null, null, otherParams, null);
+  }
+
+  private static void load(final Runnable onLoad, ArrayList<LoadLibrary> loadLibraries, Language language,
+      String callbackMethod, String otherParams, String version) {
+
+    StringBuilder url = new StringBuilder("https://maps.googleapis.com/maps/api/js?");
+    url.append("v=").append(version != null ? version : API_VERSION);
+
+    if (otherParams != null && !otherParams.isEmpty()) {
+      url.append("&").append(otherParams);
     }
 
-    if (loadLibraries != null) {
-      op += "&" + getLibraries(loadLibraries);
+    if (loadLibraries != null && !loadLibraries.isEmpty()) {
+      url.append("&").append(getLibraries(loadLibraries));
     }
 
     if (language != null) {
-      op += "&language=" + language.getValue();
+      url.append("&language=").append(language.getValue());
     }
 
-      op += "&callback=" + (callbackMethod != null ? callbackMethod : "Function.prototype");
+    String callbackName = callbackMethod;
+    if (callbackName == null) {
+      callbackName = "__gwt_maps_callback";
+      exportCallback(onLoad, callbackName);
+    }
 
-    AjaxLoaderOptions settings = AjaxLoaderOptions.newInstance();
-      settings.setOtherParms(op);
-      AjaxLoader.loadApi("maps", API_VERSION, onLoad, settings);
+    url.append("&callback=").append(callbackName);
+    url.append("&loading=async");
+
+    injectScript(url.toString());
+  }
+
+  private static native void exportCallback(Runnable onLoad, String callbackName) /*-{
+    $wnd[callbackName] = $entry(function() {
+      onLoad.@java.lang.Runnable::run()();
+      delete $wnd[callbackName];
+    });
+  }-*/;
+
+  private static void injectScript(String url) {
+    Document doc = Document.get();
+    ScriptElement script = doc.createScriptElement();
+    script.setSrc(url);
+    script.setType("text/javascript");
+    Element head = doc.getElementsByTagName("head").getItem(0);
+    if (head == null) {
+      head = doc.getDocumentElement();
+    }
+    head.appendChild(script);
   }
 
   /**
@@ -172,61 +193,49 @@ public class LoadApi {
    */
   public static enum LoadLibrary {
 
-      /**
-       * Allows your Maps API application to include context-sensitive text ads, allowing you to share in ad revenue for
-       * ads shown to your users. Consult the AdSense Library documentation for more information.
-       */
-      ADSENSE,
+    /**
+     * Provides a graphical interface for users to draw polygons, rectangles, polylines, circles, and markers on the
+     * map. Consult the Drawing Library documentation for more information.
+     */
+    DRAWING,
 
-      /**
-       * Provides a graphical interface for users to draw polygons, rectangles, polylines, circles, and markers on the
-       * map. Consult the Drawing Library documentation for more information.
-       */
-      DRAWING,
+    /**
+     * Geometry includes utility functions for calculating scalar geometric values (such as distance and area) on the
+     * the surface of the earth. Consult the Geometry Library documentation for more information.
+     */
+    GEOMETRY,
 
-      /**
-       * Geometry includes utility functions for calculating scalar geometric values (such as distance and area) on the
-       * the surface of the earth. Consult the Geometry Library documentation for more information.
-       */
-      GEOMETRY,
+    /**
+     * Places enables your application to search for businesses, geographic locations, and points of interest near a
+     * given location, or as a user types. Consult the Places Library documentation for more information.
+     */
+    PLACES,
 
-      /**
-       * Panoramio contains functionality for adding Panoramio photo layers to your Maps API application. Consult the
-       * Panoramio Layers documentation for more information.
-       */
-      PANORAMIO,
+    /**
+     * Visualization contains functionality for adding advanced visualization layers to your Maps API application.
+     * Consult the Visualization documentation for more information.
+     */
+    VISUALIZATION,
 
-      /**
-       * Places enables your application to search for businesses, geographic locations, and points of interest near a
-       * given location, or as a user types. Consult the Places Library documentation for more information.
-       */
-      PLACES,
+    /**
+     * Required for Advanced Markers.
+     */
+    MARKER;
 
-      /**
-       * Weather contains functionality for adding meterological layers to your Maps API application. Consult the Weather
-       * Layers documentation for more information.
-       */
-      WEATHER,
+    public static LoadLibrary fromValue(String value) {
+      return valueOf(value.toUpperCase());
+    }
 
-      /**
-       * Visualization contains functionality for adding advanced visualization layers to your Maps API application.
-       * Consult the Visualization documentation for more information.
-       */
-      VISUALIZATION;
+    public String value() {
+      return name().toLowerCase();
+    }
 
-      public static LoadLibrary fromValue(String value) {
-          return valueOf(value.toUpperCase());
-      }
-
-      public String value() {
-          return name().toLowerCase();
-      }
-
-      @Override
-      public String toString() {
-          return name().toLowerCase();
-      }
+    @Override
+    public String toString() {
+      return name().toLowerCase();
+    }
   }
+
 
     /**
      * @See <a href="https://developers.google.com/maps/documentation/javascript/basics#Localization">Localization docs</a>
@@ -282,8 +291,7 @@ public class LoadApi {
         TURKISH("tr"),
         UKRAINIAN("uk"),
         VIETNAMESE("vi"),
-        CHINESE_SIMPLIFIED("zh-CN"),
-        CHINESE_TRADITIONAL("zh-TW"),
+        CHINESE_SIMPLIFIED("zh-CN"),        CHINESE_TRADITIONAL("zh-TW"),
         DANISH("da");
 
         private String value;
