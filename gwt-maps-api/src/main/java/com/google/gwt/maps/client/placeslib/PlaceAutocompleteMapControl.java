@@ -166,16 +166,18 @@ public class PlaceAutocompleteMapControl extends Composite {
     setMaxWidth("calc(100vw - 48px)");
 
     // The Google web component renders its own input and popup. The wrapper only controls
-    // the map-control box around it: stable sizing, stacking, and event isolation.
+    // the map-control box around it: stable sizing, stacking, and attach/detach lifecycle.
     container.getElement().getStyle().setPosition(Position.RELATIVE);
     container.getElement().getStyle().setZIndex(1000000);
     preventMapHitsFrom(container.getElement());
   }
 
   private static native void preventMapHitsFrom(Element element) /*-{
-    // Map controls live above the map canvas. Click/touch/key events that start inside the
-    // autocomplete must not also reach the map, otherwise focusing or typing in the search
-    // field can pan/select the map underneath.
+    // OverlayView.preventMapHitsFrom is the documented Maps API hook, but it is not
+    // enough for PlaceAutocompleteElement in some host layouts: the map can still
+    // receive pointer/key events before the web component gets a usable focus state.
+    // Stop bubbling at the wrapper as a fallback so click/focus/type stays inside
+    // the autocomplete control.
     var stop = function(event) {
       event.stopPropagation();
     };
