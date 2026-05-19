@@ -73,7 +73,8 @@ public class Place extends JavaScriptObject {
       $entry(handler.@com.google.gwt.maps.client.placeslib.PlaceFetchFieldsHandler::onSuccess(Lcom/google/gwt/maps/client/placeslib/Place;)(this));
       return;
     }
-    promise.then(function(place) {
+    promise.then(function(result) {
+      var place = result && result.place ? result.place : result;
       $entry(handler.@com.google.gwt.maps.client.placeslib.PlaceFetchFieldsHandler::onSuccess(Lcom/google/gwt/maps/client/placeslib/Place;)(place));
     }, function(error) {
       var message = error && error.message ? error.message : (error ? "" + error : null);

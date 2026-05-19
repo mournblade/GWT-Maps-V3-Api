@@ -37,6 +37,8 @@ public class LoadApi {
    */
   public final static String API_VERSION = "quarterly";
 
+  private static int callbackCounter = 0;
+
   /**
    * private constructor
    */
@@ -131,7 +133,7 @@ public class LoadApi {
 
     String callbackName = callbackMethod;
     if (callbackName == null) {
-      callbackName = "__gwt_maps_callback";
+      callbackName = nextCallbackName();
       exportCallback(onLoad, callbackName);
     }
 
@@ -139,6 +141,10 @@ public class LoadApi {
     url.append("&loading=async");
 
     injectScript(url.toString());
+  }
+
+  private static String nextCallbackName() {
+    return "__gwt_maps_callback_" + callbackCounter++;
   }
 
   private static native void exportCallback(Runnable onLoad, String callbackName) /*-{

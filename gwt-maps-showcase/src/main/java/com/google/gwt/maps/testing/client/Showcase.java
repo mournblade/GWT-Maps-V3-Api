@@ -23,6 +23,7 @@ package com.google.gwt.maps.testing.client;
 import java.util.ArrayList;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.LoadApi;
 import com.google.gwt.maps.client.LoadApi.LoadLibrary;
 import com.google.gwt.maps.testing.client.maps.AdvancedLayersWidget;
@@ -44,6 +45,7 @@ import com.google.gwt.maps.testing.client.maps.MultipleKmlMapWidget;
 import com.google.gwt.maps.testing.client.maps.OpenStreetMapLayerWidget;
 import com.google.gwt.maps.testing.client.maps.OverlayViewMapWidget;
 import com.google.gwt.maps.testing.client.maps.PlaceSearchMapWidget;
+import com.google.gwt.maps.testing.client.maps.PlaceAutocompleteHideMapWidget;
 import com.google.gwt.maps.testing.client.maps.PolylineMapWidget;
 import com.google.gwt.maps.testing.client.maps.StreetViewCustomMapWidget;
 import com.google.gwt.maps.testing.client.maps.StreetViewMapWidget;
@@ -82,7 +84,7 @@ public class Showcase implements EntryPoint {
 
     String key = com.google.gwt.user.client.Window.Location.getParameter("key");
     String otherParams = (key != null && !key.isEmpty()) ? "key=" + key : null;
-
+    GWT.log("key=" + key + ", otherParams=" + otherParams);
     LoadApi.go(onLoad, loadLibraries, null, otherParams);
   }
 
@@ -117,6 +119,7 @@ public class Showcase implements EntryPoint {
     drawAdvancedMarkers();
 
     drawAutocomplete();
+    drawPlaceAutocompleteHide();
 
 
     /*drawCustomControlsMap();
@@ -255,6 +258,11 @@ public class Showcase implements EntryPoint {
 
   private void drawAutocomplete() {
     AutocompletePlacesMapWidget wMap = new AutocompletePlacesMapWidget();
+    addMapWidget(wMap);
+  }
+
+  private void drawPlaceAutocompleteHide() {
+    PlaceAutocompleteHideMapWidget wMap = new PlaceAutocompleteHideMapWidget();
     addMapWidget(wMap);
   }
 

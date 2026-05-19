@@ -100,6 +100,13 @@ public class PlaceAutocompleteElement extends Widget {
     this.@com.google.gwt.user.client.ui.Widget::getElement()().focus();
   }-*/;
 
+  /**
+   * Blur the input field.
+   */
+  public final native void blur() /*-{
+    this.@com.google.gwt.user.client.ui.Widget::getElement()().blur();
+  }-*/;
+
   public HandlerRegistration addPlaceSelectHandler(PlaceSelectHandler handler) {
     if (handler == null) {
       return new HandlerRegistration() {
@@ -151,15 +158,27 @@ public class PlaceAutocompleteElement extends Widget {
     var callback = function(event) {
       var place = null;
       if (event) {
-        place = event.place || (event.detail && event.detail.place) || null;
+        var placePrediction = event.placePrediction || (event.detail && event.detail.placePrediction) || null;
+        if (placePrediction && placePrediction.toPlace) {
+          place = placePrediction.toPlace();
+        } else {
+          place = event.place || (event.detail && event.detail.place) || null;
+        }
       }
       $entry(handler.@com.google.gwt.maps.client.placeslib.PlaceSelectHandler::onPlaceSelect(Lcom/google/gwt/maps/client/placeslib/Place;)(place));
     };
+    element.addEventListener("gmp-select", callback);
     element.addEventListener("gmp-placeselect", callback);
-    return callback;
+    return {
+      callback : callback
+    };
   }-*/;
 
   private static native void removePlaceSelectHandlerImpl(Element element, JavaScriptObject listener) /*-{
-    element.removeEventListener("gmp-placeselect", listener);
+    if (!listener || !listener.callback) {
+      return;
+    }
+    element.removeEventListener("gmp-select", listener.callback);
+    element.removeEventListener("gmp-placeselect", listener.callback);
   }-*/;
 }
