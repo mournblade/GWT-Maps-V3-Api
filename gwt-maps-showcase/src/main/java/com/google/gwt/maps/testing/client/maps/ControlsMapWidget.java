@@ -57,9 +57,6 @@ public class ControlsMapWidget extends Composite {
   private void draw() {
 
     pWidget.clear();
-
-    pWidget.add(new HTML("<br>Basic Map Controls Position Example"));
-
     drawMap();
 
   }

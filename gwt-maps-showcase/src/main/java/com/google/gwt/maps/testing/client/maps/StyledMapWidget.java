@@ -61,9 +61,6 @@ public class StyledMapWidget extends Composite {
   private void draw() {
 
     pWidget.clear();
-    pWidget
-        .add(new HTML(
-            "<br><div class='styledExample'>Styled Map Example w/ <span>Blue highways</span>, <span>Black landscape</span>, and <span>Red roads</span></div>"));
     drawMap();
   }
 

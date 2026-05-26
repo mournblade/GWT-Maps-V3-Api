@@ -58,7 +58,10 @@ public class BasicMapWidget extends Composite {
   }
 
   private void draw() {
-    Button addBounceMarkerButton = new Button("Add Marker with Bounce");
+    HTML html = new HTML("Basic Map with Animations &nbsp;");
+    
+    Button addBounceMarkerButton = new Button("Bounce");
+    addBounceMarkerButton.addStyleName("showcase-button");
     addBounceMarkerButton.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
         if (markerBouncing != null) {
@@ -68,7 +71,8 @@ public class BasicMapWidget extends Composite {
       }
     });
     
-    Button addDropMarkerButton = new Button("Add Marker with Drop");
+    Button addDropMarkerButton = new Button("Drop");
+    addDropMarkerButton.addStyleName("showcase-button");
     addDropMarkerButton.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
         if (markerDrop != null) {
@@ -78,7 +82,24 @@ public class BasicMapWidget extends Composite {
       }
     });
     
-    Button stopAnimationsButton = new Button("Stop Animations");
+    Button startAnimationsButton = new Button("Start All");
+    startAnimationsButton.addStyleName("showcase-button");
+    startAnimationsButton.addClickHandler(new ClickHandler() {
+      public void onClick(ClickEvent event) {
+        if (markerBasic != null) {
+          markerBasic.setAnimation(Animation.BOUNCE);
+        }
+        if (markerBouncing != null) {
+          markerBouncing.setAnimation(Animation.BOUNCE);
+        }
+        if (markerDrop != null) { 
+          markerDrop.setAnimation(Animation.DROP);
+        }
+      }
+    });
+
+    Button stopAnimationsButton = new Button("Stop All");
+    stopAnimationsButton.addStyleName("showcase-button");
     stopAnimationsButton.addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
         if (markerBasic != null) {
@@ -93,35 +114,16 @@ public class BasicMapWidget extends Composite {
       }
     });
     
-    Button startAnimationsButton = new Button("Start Animations");
-    startAnimationsButton.addClickHandler(new ClickHandler() {
-      public void onClick(ClickEvent event) {
-        if (markerBasic != null) {
-          markerBasic.setAnimation(Animation.BOUNCE);
-        }
-        if (markerBouncing != null) {
-          markerBouncing.setAnimation(Animation.BOUNCE);
-        }
-        if (markerDrop != null) { 
-          markerDrop.setAnimation(Animation.DROP);
-        }
-      }
-    });
-    
-    // basic controls to test markers
     HorizontalPanel hp = new HorizontalPanel();
-    hp.add(new HTML("<br>Basic Map Example"));
     hp.add(addBounceMarkerButton);
-    hp.add(new HTML("&nbsp;"));
     hp.add(addDropMarkerButton);
-    hp.add(new HTML("&nbsp;"));
     hp.add(startAnimationsButton);
-    hp.add(new HTML("&nbsp;"));
     hp.add(stopAnimationsButton);
-    hp.setCellVerticalAlignment(addBounceMarkerButton, VerticalPanel.ALIGN_BOTTOM);
-    hp.setCellVerticalAlignment(addDropMarkerButton, VerticalPanel.ALIGN_BOTTOM);
-    hp.setCellVerticalAlignment(startAnimationsButton, VerticalPanel.ALIGN_BOTTOM);
-    hp.setCellVerticalAlignment(stopAnimationsButton, VerticalPanel.ALIGN_BOTTOM);
+    
+    hp.setCellVerticalAlignment(addBounceMarkerButton, VerticalPanel.ALIGN_MIDDLE);
+    hp.setCellVerticalAlignment(addDropMarkerButton, VerticalPanel.ALIGN_MIDDLE);
+    hp.setCellVerticalAlignment(startAnimationsButton, VerticalPanel.ALIGN_MIDDLE);
+    hp.setCellVerticalAlignment(stopAnimationsButton, VerticalPanel.ALIGN_MIDDLE);
 
     pWidget.clear();
     pWidget.add(hp);

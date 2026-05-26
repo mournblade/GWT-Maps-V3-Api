@@ -23,39 +23,17 @@ package com.google.gwt.maps.testing.client;
 import java.util.ArrayList;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.maps.client.LoadApi;
 import com.google.gwt.maps.client.LoadApi.LoadLibrary;
-import com.google.gwt.maps.testing.client.maps.AdvancedLayersWidget;
-import com.google.gwt.maps.testing.client.maps.AdvancedMarkerMapWidget;
-import com.google.gwt.maps.testing.client.maps.AutocompletePlacesMapWidget;
-import com.google.gwt.maps.testing.client.maps.BasicMapWidget;
-import com.google.gwt.maps.testing.client.maps.ControlsMapWidget;
-import com.google.gwt.maps.testing.client.maps.CustomControlsMapWidget;
-import com.google.gwt.maps.testing.client.maps.DirectionsServiceMapWidget;
-import com.google.gwt.maps.testing.client.maps.DrawingMapWidget;
-import com.google.gwt.maps.testing.client.maps.ElevationMapWidget;
-import com.google.gwt.maps.testing.client.maps.FusionTablesMapWidget;
-import com.google.gwt.maps.testing.client.maps.HeatMapLayerWidget;
-import com.google.gwt.maps.testing.client.maps.ImageMapTypeWidget;
-import com.google.gwt.maps.testing.client.maps.InfoWindowMapWidget;
-import com.google.gwt.maps.testing.client.maps.KmlMapWidget;
-import com.google.gwt.maps.testing.client.maps.LanguageMapWidget;
-import com.google.gwt.maps.testing.client.maps.MultipleKmlMapWidget;
-import com.google.gwt.maps.testing.client.maps.OpenStreetMapLayerWidget;
-import com.google.gwt.maps.testing.client.maps.OverlayViewMapWidget;
-import com.google.gwt.maps.testing.client.maps.PlaceSearchMapWidget;
-import com.google.gwt.maps.testing.client.maps.PlaceAutocompleteHideMapWidget;
-import com.google.gwt.maps.testing.client.maps.PolylineMapWidget;
-import com.google.gwt.maps.testing.client.maps.StreetViewCustomMapWidget;
-import com.google.gwt.maps.testing.client.maps.StreetViewMapWidget;
-import com.google.gwt.maps.testing.client.maps.StreetViewSideBySideMapWidget;
-import com.google.gwt.maps.testing.client.maps.StyledMapWidget;
-import com.google.gwt.maps.testing.client.maps.TransitDirectionsServiceMapWidget;
+import com.google.gwt.maps.testing.client.maps.*;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * Modernized GWT Maps Showcase (2026).
+ * Demonstrates both legacy and modern features of the Google Maps JS API.
+ */
 public class Showcase implements EntryPoint {
 
   private final String mapsContainer = "maps";
@@ -66,8 +44,7 @@ public class Showcase implements EntryPoint {
   }
 
   private void loadMapApi() {
-
-    // load all the libs for use in the maps
+    // Load all necessary libraries
     ArrayList<LoadLibrary> loadLibraries = new ArrayList<LoadApi.LoadLibrary>();
     loadLibraries.add(LoadLibrary.DRAWING);
     loadLibraries.add(LoadLibrary.GEOMETRY);
@@ -75,220 +52,121 @@ public class Showcase implements EntryPoint {
     loadLibraries.add(LoadLibrary.VISUALIZATION);
     loadLibraries.add(LoadLibrary.MARKER);
 
-    Runnable onLoad = new Runnable() {
-      @Override
-      public void run() {
-        draw();
-      }
-    };
+    Runnable onLoad = () -> draw();
 
+    // Support credentials and versioning via URL parameters
     String key = com.google.gwt.user.client.Window.Location.getParameter("key");
-    String otherParams = (key != null && !key.isEmpty()) ? "key=" + key : null;
-    GWT.log("key=" + key + ", otherParams=" + otherParams);
-    LoadApi.go(onLoad, loadLibraries, null, otherParams);
+    String v = com.google.gwt.user.client.Window.Location.getParameter("v");
+    String map_ids = com.google.gwt.user.client.Window.Location.getParameter("map_ids");
+    
+    String otherParams = (key != null && !key.isEmpty()) ? "key=" + key : "";
+    if (map_ids != null && !map_ids.isEmpty()) {
+      otherParams += (otherParams.isEmpty() ? "" : "&") + "map_ids=" + map_ids;
+    }
+    
+    LoadApi.go(onLoad, loadLibraries, null, otherParams.isEmpty() ? null : otherParams, v);
   }
 
-  /**
-   * See the map widgets for different map configurations
-   */
   private void draw() {
-    HTML html = new HTML("<a href='fullpage.html'>See FullScreen Map Demo</a><br/><br/>");
+    // --- Modern Features Section ---
+    addCategoryHeader("Modern Features (2026)");
 
-    RootPanel.get(mapsContainer).add(html);
-
-    /*drawHeatMap();
-
-    drawImageMapType();
-
-    drawStyledMap();
-
-    drawDrawingMap();
-
-    drawOpenStreetMapLayerMap();
-
-    drawPolylineMap();
-
-    drawDirections();
-
-    drawTransitDirections();
-
-    /*drawElevation();
-
-    drawAdvancedLayers();*/
-
+    addDemoHeader("Advanced Markers", "Custom HTML pins, collisions, and 3D builds.");
     drawAdvancedMarkers();
 
-    drawAutocomplete();
-    drawPlaceAutocompleteHide();
+    addDemoHeader("Modern Search", "Official Google 3.65.1c 'No Clear Button' feature.");
+    drawNoClearButtonAutocomplete();
 
+    addDemoHeader("Legacy Smart Search", "Standard GWT TextBox with rich landmark results.");
+    drawLegacyAutocomplete();
 
-    /*drawCustomControlsMap();
+    // --- Core Map Demos Section ---
+    addCategoryHeader("Core Map Demos");
 
-    drawInfoWindowMap();
-
-    drawStreetViewSideBySide();
-
-    drawStreetViewCustom();
-
-    drawStreetView();
-
-
-
+    addDemoHeader("Basic Map", "Animations and standard markers.");
     drawBasicMap();
 
-    drawFusionMap();
+    addDemoHeader("Styled Map", "Cloud-ready custom map styles.");
+    drawStyledMap();
 
+    addDemoHeader("Map Controls", "Positioning standard UI elements.");
+    drawControlsMap();
+
+    // --- Services & Overlays Section ---
+    addCategoryHeader("Services & Overlays");
+
+    addDemoHeader("Directions Service", "Calculating routes and transit.");
+    drawDirections();
+
+    addDemoHeader("Drawing Library", "Interactive shapes and tools.");
+    drawDrawingMap();
+
+    addDemoHeader("KML Overlays", "Rendering external geospatial data.");
     drawKmlMap();
 
-    drawMapWcontrols();
-
-    drawPlaceSearchRequestMap();
-
-    drawMultipleKmlMap();
-
-    drawOverlayViewMap();
-    
-    // TODO put on its own page someday
-    //drawLanguageMap();     */
+    addDemoHeader("Street View", "Immersive 360-degree imagery.");
+    drawStreetView();
   }
 
-  /**
-   * Add the widget to the demos
-   * 
-   * @param widget map
-   */
+  private void addCategoryHeader(String title) {
+    RootPanel.get(mapsContainer).add(new HTML("<h2 class='category-header'>" + title + "</h2>"));
+  }
+
+  private void addDemoHeader(String title, String subTitle) {
+    RootPanel.get(mapsContainer).add(new HTML("<div class='demo-header-box'>"
+        + "<h3 class='demo-title'>" + title + "</h3>"
+        + "<p class='demo-subtitle'>" + subTitle + "</p></div>"));
+  }
+
+
   private void addMapWidget(Widget widget) {
     RootPanel.get(mapsContainer).add(widget);
   }
 
-  private void drawHeatMap() {
-    HeatMapLayerWidget wMap = new HeatMapLayerWidget();
-    addMapWidget(wMap);
+  // --- Modern Demos ---
+
+  private void drawAdvancedMarkers() {
+    addMapWidget(new AdvancedMarkerMapWidget());
   }
 
-  private void drawImageMapType() {
-    ImageMapTypeWidget wMap = new ImageMapTypeWidget();
-    addMapWidget(wMap);
+  private void drawNoClearButtonAutocomplete() {
+    addMapWidget(new NoClearButtonAutocompleteMapWidget());
+  }
+
+  private void drawLegacyAutocomplete() {
+    addMapWidget(new LegacyAutocompleteMapWidget());
+  }
+
+  // --- Core Demos ---
+
+  private void drawBasicMap() {
+    addMapWidget(new BasicMapWidget());
   }
 
   private void drawStyledMap() {
-    StyledMapWidget wMap = new StyledMapWidget();
-    addMapWidget(wMap);
+    addMapWidget(new StyledMapWidget());
   }
 
-  private void drawElevation() {
-    ElevationMapWidget wMap = new ElevationMapWidget();
-    addMapWidget(wMap);
+  private void drawControlsMap() {
+    addMapWidget(new ControlsMapWidget());
   }
 
-  private void drawAdvancedLayers() {
-    AdvancedLayersWidget wMap = new AdvancedLayersWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawAdvancedMarkers() {
-    AdvancedMarkerMapWidget wMap = new AdvancedMarkerMapWidget();
-    addMapWidget(wMap);
-  }
+  // --- Services Demos ---
 
   private void drawDirections() {
-    DirectionsServiceMapWidget wMap = new DirectionsServiceMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawTransitDirections() {
-    TransitDirectionsServiceMapWidget wMap = new TransitDirectionsServiceMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawCustomControlsMap() {
-    CustomControlsMapWidget wMap = new CustomControlsMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawInfoWindowMap() {
-    InfoWindowMapWidget wMap = new InfoWindowMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawStreetViewSideBySide() {
-    StreetViewSideBySideMapWidget wStreet = new StreetViewSideBySideMapWidget();
-    addMapWidget(wStreet);
-  }
-
-  private void drawStreetViewCustom() {
-    StreetViewCustomMapWidget wStreet = new StreetViewCustomMapWidget();
-    addMapWidget(wStreet);
-  }
-
-  private void drawStreetView() {
-    StreetViewMapWidget wStreet = new StreetViewMapWidget();
-    addMapWidget(wStreet);
+    addMapWidget(new DirectionsServiceMapWidget());
   }
 
   private void drawDrawingMap() {
-    DrawingMapWidget wMap = new DrawingMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawPolylineMap() {
-    PolylineMapWidget plMap = new PolylineMapWidget();
-    addMapWidget(plMap);
-  }
-
-  private void drawBasicMap() {
-    BasicMapWidget wMap = new BasicMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawFusionMap() {
-    FusionTablesMapWidget wMap = new FusionTablesMapWidget();
-    addMapWidget(wMap);
+    addMapWidget(new DrawingMapWidget());
   }
 
   private void drawKmlMap() {
-    KmlMapWidget wMap = new KmlMapWidget();
-    addMapWidget(wMap);
+    addMapWidget(new KmlMapWidget());
   }
 
-  private void drawMapWcontrols() {
-    ControlsMapWidget wMap = new ControlsMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawAutocomplete() {
-    AutocompletePlacesMapWidget wMap = new AutocompletePlacesMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawPlaceAutocompleteHide() {
-    PlaceAutocompleteHideMapWidget wMap = new PlaceAutocompleteHideMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawPlaceSearchRequestMap() {
-    PlaceSearchMapWidget wMap = new PlaceSearchMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawMultipleKmlMap() {
-    MultipleKmlMapWidget wMap = new MultipleKmlMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawOverlayViewMap() {
-    OverlayViewMapWidget wMap = new OverlayViewMapWidget();
-    addMapWidget(wMap);
-  }
-
-  private void drawOpenStreetMapLayerMap() {
-    OpenStreetMapLayerWidget wMap = new OpenStreetMapLayerWidget();
-    addMapWidget(wMap);
-  }
-  
-  private void drawLanguageMap() {
-    LanguageMapWidget wMap = new LanguageMapWidget();
-    addMapWidget(wMap);
+  private void drawStreetView() {
+    addMapWidget(new StreetViewMapWidget());
   }
   
 }

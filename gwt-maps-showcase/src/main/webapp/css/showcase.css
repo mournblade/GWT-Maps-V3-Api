@@ -2,7 +2,7 @@
  * #%L
  * GWT Maps API V3 - Showcase
  * %%
- * Copyright (C) 2011 - 2012 GWT Maps API V3
+ * Copyright (C) 2011 - 2026 GWT Maps API V3
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,111 +17,139 @@
  * limitations under the License.
  * #L%
  */
-html {
-	width: 100%;
-	height: 100%;
-	margin: 0;
+/*
+ * Modernized 2026 Styles for GWT Maps Showcase
+ * Linear List Design
+ */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
     padding: 0;
-    /* border:1px solid #FF0000; */
+    font-family: 'Roboto', 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f1f3f4;
+    color: #3c4043;
 }
 
 body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-    padding: 0;
-    /* border:1px solid blue; */
+    padding: 40px;
+    box-sizing: border-box;
 }
 
-/* Styled maps example */
-.styledExample {
-	margin-bottom:5px;	
+#maps {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-.styledExample span {
-	border-radius:5px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	padding:3px;
-	color:white;
-}
-.styledExample span:nth-child(1) {
-	background-color:blue;
-}
-.styledExample span:nth-child(2) {
-	background-color:black;
-}
-.styledExample span:nth-child(3) {
-	background-color:red;
+/* Category Headers (Section Dividers) */
+h2.category-header {
+    color: #1a73e8;
+    border-bottom: 2px solid #dadce0;
+    padding-bottom: 12px;
+    margin-top: 70px;
+    margin-bottom: 30px;
+    font-weight: 500;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 22px;
 }
 
-.test1 {
-  border:1px solid #FF0000;
-}
-.test2 {
-  border:1px solid blue;
-}
-.test3 {
-  border:1px solid #00FF00;	
-}
-.test4 {
-  border:1px solid #000000;
-}
-.test5 {
-  border:1px solid grey;
-}
-.test6 {
-  border:1px solid #0000FF;
-}
-.test7 {
-  border:1px solid #EFEFEF;
-}
-.test8 {
-  border:1px solid #FFFF00;
-}
-.dialogTour {
-	background-color: rgba(244, 228, 73, 1.0);
-	color: black;
-	border: 0;
-	padding: 0;
-	margin-left: 5px;
-	margin-top: 5px;
-	
+/* Individual Demo Headers */
+.demo-header-box {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 12px;
 }
 
-/** Custom overlay CSS **/
-.toggleButton
-{
-    background-color            :    #ccc;
-    color                       :    #000;
-    border                      :    1px solid #666;
-    cursor                      :    hand;
-    cursor                      :    pointer;
-    font-size                   :    75%;
-    margin                      :    3px 1px;
-    padding                     :    1px 10px;
-    width                       :    150px;
-    text-align                  :    center;
-}
-.toggleButton-up-hovering
-{
-    padding                     :    0px 9px;
-    color                       :    #fff;
-    border-top                  :    2px solid #fff;
-    border-left                 :    2px solid #fff;
-    border-right                :    2px solid #888;
-    border-bottom               :    2px solid #888;
-}
-.toggleButton-down, .toggleButton-down-hovering
-{
-    background-color            :    #888;
-    padding                     :    0px 9px;
-    border-top                  :    2px solid #333;
-    border-left                 :    2px solid #333;
-    border-right                :    2px solid #ccc;
-    border-bottom               :    2px solid #ccc;
+.demo-title {
+    color: #202124;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 4px 0;
 }
 
-.customOverlay {
-	background-color            :    #fff;
+.demo-subtitle {
+    color: #70757a;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* The Demo Card Container */
+.gwt-Composite {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(60,64,67, 0.3), 0 1px 3px 1px rgba(60,64,67, 0.15);
+    margin-bottom: 60px; /* Large gap before the next demo header */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Row containing buttons/inputs inside the card */
+.gwt-HorizontalPanel {
+    margin-bottom: 25px !important;
+}
+
+/* Vertical spacing for GWT internals */
+.gwt-VerticalPanel > tbody > tr > td {
+    padding-bottom: 10px;
+}
+
+/* Professional Button Styling */
+.showcase-button {
+    background-color: #1a73e8 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 10px 24px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    margin-left: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67, .3) !important;
+}
+
+.showcase-button:hover {
+    background-color: #1765cc !important;
+    box-shadow: 0 1px 3px 0 rgba(60,64,67, .3), 0 4px 8px 3px rgba(60,64,67, .15) !important;
+}
+
+/* Form Elements */
+input[type="text"], .gwt-TextBox {
+    padding: 12px 18px !important;
+    border: 1px solid #dadce0 !important;
+    border-radius: 8px !important;
+    font-size: 15px !important;
+    outline: none !important;
+}
+
+input[type="text"]:focus, .gwt-TextBox:focus {
+    border: 2px solid #1a73e8 !important;
+}
+
+/* The Map Container */
+.gwt-SimplePanel, div[id^="posFinder_"] {
+    margin-top: 15px !important;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Special Styling for the Legacy Search */
+.locationFinderPopupTextBox {
+    width: 380px !important;
+    height: 48px !important;
+    border-radius: 24px !important;
+    box-shadow: 0 1px 6px rgba(32,33,36,0.28) !important;
+    padding-left: 48px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' width='24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z' fill='%2370757a'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: 14px center !important;
 }

@@ -45,8 +45,6 @@ public class AdvancedMarkerMapWidget extends Composite {
   }
 
   private void draw() {
-    pWidget.add(new HTML("<br>Advanced Marker Example (Requires Map ID for full features)"));
-
     drawMap();
     drawAdvancedMarker();
     drawCustomPinMarker();
@@ -60,9 +58,11 @@ public class AdvancedMarkerMapWidget extends Composite {
     opts.setMapTypeId(MapTypeId.ROADMAP);
     
     // Support testing with a real Map ID via URL parameter
-    String mapId = com.google.gwt.user.client.Window.Location.getParameter("mapId");
-    if (mapId != null && !mapId.isEmpty()) {
-      opts.setMapId(mapId);
+    String mapIds = com.google.gwt.user.client.Window.Location.getParameter("map_ids");
+    if (mapIds != null && !mapIds.isEmpty()) {
+      // Note: MapOptions.setMapId takes a single ID. We use the first one from the list if multiple were provided.
+      String firstId = mapIds.contains(",") ? mapIds.substring(0, mapIds.indexOf(",")) : mapIds;
+      opts.setMapId(firstId);
     }
 
     mapWidget = new MapWidget(opts);

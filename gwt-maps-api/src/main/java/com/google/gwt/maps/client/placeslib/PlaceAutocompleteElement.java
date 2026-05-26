@@ -80,6 +80,20 @@ public class PlaceAutocompleteElement extends Widget {
   }
 
   /**
+   * Sets whether the clear button is removed from the search box.
+   * <br>Note: Requires Google Maps version 3.65.1c or later.
+   * 
+   * @param noClear
+   */
+  public final void setNoClearButton(boolean noClear) {
+    if (noClear) {
+      getElement().setAttribute("no-clear-button", "");
+    } else {
+      getElement().removeAttribute("no-clear-button");
+    }
+  }
+
+  /**
    * Gets the value of the input field.
    */
   public final native String getValue() /*-{

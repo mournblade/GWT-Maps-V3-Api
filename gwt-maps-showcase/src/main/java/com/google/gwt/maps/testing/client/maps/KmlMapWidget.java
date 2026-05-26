@@ -61,13 +61,6 @@ public class KmlMapWidget extends Composite {
 
     pWidget.clear();
 
-    pWidget.add(new HTML("&nbsp;"));
-
-    HorizontalPanel hp = new HorizontalPanel();
-    hp.add(new HTML("Kml Example - Try clicking on marker &nbsp;&nbsp;&nbsp;"));
-
-    pWidget.add(hp);
-
     drawMap();
 
     // draw kmls

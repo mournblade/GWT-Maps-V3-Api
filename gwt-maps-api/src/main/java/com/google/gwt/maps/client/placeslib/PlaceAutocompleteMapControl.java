@@ -53,6 +53,7 @@ public class PlaceAutocompleteMapControl extends Composite {
     this.controlPosition = controlPosition;
     this.container = new FlowPanel();
     this.placeAutocomplete = new PlaceAutocompleteElement();
+    placeAutocomplete.setNoClearButton(true);
 
     initWidget(container);
     setupContainer();
@@ -91,6 +92,14 @@ public class PlaceAutocompleteMapControl extends Composite {
 
   public void setLocationRestriction(LatLngBounds bounds) {
     placeAutocomplete.setLocationRestriction(bounds);
+  }
+
+  /**
+   * Sets whether the clear button is removed from the search box.
+   * <br>Note: Requires Google Maps version 3.65.1c or later.
+   */
+  public void setNoClearButton(boolean noClear) {
+    placeAutocomplete.setNoClearButton(noClear);
   }
 
   public void setWidth(String width) {
